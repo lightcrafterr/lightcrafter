@@ -422,6 +422,17 @@ body {
   object-fit: contain;
   border-radius: 50%;
   background: #000;
+  /* Nudge overlay slightly toward top-left inside its cell */
+  transform: translate(-12px, -10px);
+}
+
+/* Legend row above showcase: no heavy bottom border (card already has grid) */
+.gallery-card.showcase-envmap-legend {
+  padding-bottom: 0.35rem;
+}
+
+.showcase-envmap-legend-spacer .title {
+  margin-bottom: 0.35rem;
 }
 
 #pipeline figure.image img,
