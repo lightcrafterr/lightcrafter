@@ -75,4 +75,63 @@ $(document).ready(function() {
 
     bulmaSlider.attach();
 
+    // ----- Synchronize videos within the same comparison/gallery row -----
+    // Each `.comparison-card > .columns` or `.gallery-card > .columns` is a
+    // group whose videos should loop in lockstep. We:
+    //   1. wait for all videos in the group to reach `loadedmetadata`,
+    //   2. once ready, lock their currentTime to the first video's currentTime
+    //      every animation frame so playback stays in sync,
+    //   3. when one video reaches its end (and it loops), seek every sibling
+    //      back to 0 so we don't drift.
+    function syncVideoGroup(groupRoot) {
+      var videos = Array.prototype.slice.call(
+        groupRoot.querySelectorAll('video.comparison-video, video.gallery-video')
+      );
+      if (videos.length < 2) return;
+
+      videos.forEach(function (v) {
+        v.muted = true;
+        v.playsInline = true;
+        v.loop = true;
+      });
+
+      function ready(v) {
+        return v.readyState >= 1;  // HAVE_METADATA
+      }
+
+      function whenAllReady(cb) {
+        if (videos.every(ready)) { cb(); return; }
+        videos.forEach(function (v) {
+          if (!ready(v)) {
+            v.addEventListener('loadedmetadata', function once() {
+              v.removeEventListener('loadedmetadata', once);
+              if (videos.every(ready)) cb();
+            });
+          }
+        });
+      }
+
+      whenAllReady(function () {
+        var anchor = videos[0];
+        anchor.currentTime = 0;
+        videos.forEach(function (v) { v.currentTime = 0; });
+        videos.forEach(function (v) { v.play().catch(function () { /* ignore autoplay errors */ }); });
+
+        // Re-sync every animation frame using the first video as the master clock.
+        function tick() {
+          var t = anchor.currentTime;
+          videos.forEach(function (v, idx) {
+            if (idx === 0) return;
+            var drift = Math.abs(v.currentTime - t);
+            if (drift > 0.12) v.currentTime = t;
+          });
+          requestAnimationFrame(tick);
+        }
+        requestAnimationFrame(tick);
+      });
+    }
+
+    document.querySelectorAll('.comparison-card, .gallery-card').forEach(function (card) {
+      syncVideoGroup(card);
+    });
 })
