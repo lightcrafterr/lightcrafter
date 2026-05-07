@@ -76,17 +76,19 @@ $(document).ready(function() {
     bulmaSlider.attach();
 
     // ----- Synchronize videos within the same comparison/gallery row -----
-    // Each `.comparison-card > .columns` or `.gallery-card > .columns` is a
-    // group whose videos should loop in lockstep. We:
-    //   1. wait for all videos in the group to reach `loadedmetadata`,
-    //   2. once ready, lock their currentTime to the first video's currentTime
-    //      every animation frame so playback stays in sync,
-    //   3. when one video reaches its end (and it loops), seek every sibling
-    //      back to 0 so we don't drift.
-    function syncVideoGroup(groupRoot) {
-      var videos = Array.prototype.slice.call(
-        groupRoot.querySelectorAll('video.comparison-video, video.gallery-video')
+    // For each `.comparison-card` or `.gallery-card` we install one master
+    // clock that retimes every sibling video to the first video's currentTime.
+    // The clock keeps ticking forever, so even when we swap a <source> mid-
+    // playback (e.g. via the baseline/scene picker) the new video catches up
+    // to the running playhead automatically.
+    function videosIn(card) {
+      return Array.prototype.slice.call(
+        card.querySelectorAll('video.comparison-video, video.gallery-video')
       );
+    }
+
+    function syncVideoGroup(card) {
+      var videos = videosIn(card);
       if (videos.length < 2) return;
 
       videos.forEach(function (v) {
@@ -95,9 +97,7 @@ $(document).ready(function() {
         v.loop = true;
       });
 
-      function ready(v) {
-        return v.readyState >= 1;  // HAVE_METADATA
-      }
+      function ready(v) { return v.readyState >= 1; }
 
       function whenAllReady(cb) {
         if (videos.every(ready)) { cb(); return; }
@@ -112,19 +112,24 @@ $(document).ready(function() {
       }
 
       whenAllReady(function () {
-        var anchor = videos[0];
-        anchor.currentTime = 0;
         videos.forEach(function (v) { v.currentTime = 0; });
-        videos.forEach(function (v) { v.play().catch(function () { /* ignore autoplay errors */ }); });
+        videos.forEach(function (v) {
+          v.play().catch(function () { /* ignore autoplay errors */ });
+        });
 
-        // Re-sync every animation frame using the first video as the master clock.
         function tick() {
-          var t = anchor.currentTime;
-          videos.forEach(function (v, idx) {
-            if (idx === 0) return;
-            var drift = Math.abs(v.currentTime - t);
-            if (drift > 0.12) v.currentTime = t;
-          });
+          // Refresh the live list every tick so newly-swapped videos in the
+          // same card are picked up.
+          var live = videosIn(card);
+          if (live.length >= 2) {
+            var anchor = live[0];
+            var t = anchor.currentTime;
+            live.forEach(function (v, idx) {
+              if (idx === 0) return;
+              var drift = Math.abs(v.currentTime - t);
+              if (drift > 0.12) v.currentTime = t;
+            });
+          }
           requestAnimationFrame(tick);
         }
         requestAnimationFrame(tick);
@@ -134,4 +139,112 @@ $(document).ready(function() {
     document.querySelectorAll('.comparison-card, .gallery-card').forEach(function (card) {
       syncVideoGroup(card);
     });
+
+    // ----- Realworld baseline picker -----
+    // Each .baseline-picker button[data-baseline] updates the rightmost cell
+    // of its parent comparison-card to play that baseline's video. Source paths
+    // assume the card has an existing <source src=".../<baseline>.mp4"> we can
+    // pattern-match on to extract the row's folder.
+    var CACHE_BUSTER = '?v=5';
+
+    function setSrc(video, url) {
+      var src = video.querySelector('source');
+      if (!src) return;
+      var clean = url.split('?')[0];
+      src.setAttribute('src', clean + CACHE_BUSTER);
+      video.load();
+      video.play().catch(function () { /* ignore */ });
+    }
+
+    function activeButton(group, value, attr) {
+      Array.prototype.slice.call(group.querySelectorAll('button'))
+        .forEach(function (b) {
+          if (b.getAttribute(attr) === value) b.classList.add('is-active');
+          else b.classList.remove('is-active');
+        });
+    }
+
+    function wireBaselinePicker(card) {
+      var picker = card.querySelector('.baseline-picker');
+      var swapVideo = card.querySelector('video[data-method="baseline-pick"]');
+      var swapLabel = card.querySelector('.baseline-cell-label');
+      if (!picker || !swapVideo) return;
+
+      // Derive folder root from the swap video's current src so this helper
+      // works for any row (e.g. ./static/videos/comparison/realworld-row/).
+      var initialSrc = swapVideo.querySelector('source').getAttribute('src') || '';
+      var folderRoot = initialSrc.replace(/\/[^\/]+\.mp4(\?.*)?$/, '/');
+
+      var labelMap = {
+        lightx: 'vs LightX',
+        dr: 'vs DR',
+        unirelight: 'vs UniRelight',
+        pbr: 'vs PBR',
+        pcrp: 'vs PCRP'
+      };
+
+      Array.prototype.slice.call(picker.querySelectorAll('button[data-baseline]'))
+        .forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            var baseline = btn.getAttribute('data-baseline');
+            activeButton(picker, baseline, 'data-baseline');
+            swapVideo.setAttribute('data-current', baseline);
+            if (swapLabel) swapLabel.textContent = labelMap[baseline] || ('vs ' + baseline);
+            setSrc(swapVideo, folderRoot + baseline + '.mp4');
+          });
+        });
+    }
+
+    document.querySelectorAll('.comparison-card .baseline-picker').forEach(function (picker) {
+      var card = picker.closest('.comparison-card');
+      if (card) wireBaselinePicker(card);
+    });
+
+    // ----- Before/after slider in the Showcase rows -----
+    function wireSlider(cell) {
+      var beforeVid = cell.querySelector('video.slider-before');
+      var afterVid = cell.querySelector('video.slider-after');
+      if (!beforeVid || !afterVid) return;
+      [beforeVid, afterVid].forEach(function (v) {
+        v.muted = true; v.playsInline = true; v.loop = true;
+        v.play().catch(function () { /* ignore */ });
+      });
+
+      // Keep the two videos frame-locked to each other.
+      function tick() {
+        var t = beforeVid.currentTime;
+        if (Math.abs(afterVid.currentTime - t) > 0.12) {
+          afterVid.currentTime = t;
+        }
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+
+      var dragging = false;
+
+      function setPos(clientX) {
+        var rect = cell.getBoundingClientRect();
+        var x = clientX - rect.left;
+        var pct = Math.max(0, Math.min(100, (x / rect.width) * 100));
+        cell.style.setProperty('--pos', pct + '%');
+      }
+
+      cell.addEventListener('mousedown', function (e) {
+        dragging = true; setPos(e.clientX); e.preventDefault();
+      });
+      window.addEventListener('mousemove', function (e) {
+        if (dragging) setPos(e.clientX);
+      });
+      window.addEventListener('mouseup', function () { dragging = false; });
+
+      cell.addEventListener('touchstart', function (e) {
+        if (e.touches.length) { dragging = true; setPos(e.touches[0].clientX); }
+      }, { passive: true });
+      cell.addEventListener('touchmove', function (e) {
+        if (dragging && e.touches.length) setPos(e.touches[0].clientX);
+      }, { passive: true });
+      cell.addEventListener('touchend', function () { dragging = false; });
+    }
+
+    document.querySelectorAll('.slider-cell').forEach(wireSlider);
 })

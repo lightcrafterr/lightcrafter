@@ -160,8 +160,8 @@ body {
 /* Comparison & Gallery cards */
 .comparison-card,
 .gallery-card {
-  margin-bottom: 2.5rem;
-  padding: 1rem 0.5rem 1.5rem 0.5rem;
+  margin-bottom: 1rem;
+  padding: 0.5rem 0.25rem 0.75rem;
   border-bottom: 1px solid #eaeaea;
 }
 
@@ -173,13 +173,20 @@ body {
 .comparison-card h3.title,
 .gallery-card h3.title {
   text-align: center;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
+  font-family: 'Google Sans', sans-serif;
+}
+
+.comparison-card h4.title,
+.gallery-card h4.title {
+  text-align: center;
+  margin-bottom: 0.4rem;
   font-family: 'Google Sans', sans-serif;
 }
 
 .comparison-card h5.title,
 .gallery-card h5.title {
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.35rem;
 }
 
 .comparison-video,
@@ -192,18 +199,18 @@ body {
   object-fit: contain;
 }
 
-/* Use CSS grid for the comparison row so we can fit 7 equal columns. */
+/* CSS grid for fixed-column layouts (var(--cols) per card). */
 .comparison-card > .columns,
 .gallery-card.is-grid > .columns {
   display: grid;
   grid-template-columns: repeat(var(--cols, 7), minmax(0, 1fr));
-  gap: 0.5rem;
+  gap: 0.25rem;
   margin: 0;
 }
 
 .comparison-card > .columns > .column,
 .gallery-card.is-grid > .columns > .column {
-  padding: 0.25rem;
+  padding: 0.1rem;
   margin: 0;
   width: auto;
   flex: none;
@@ -214,6 +221,207 @@ body {
   .gallery-card.is-grid > .columns {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
+
+/* Tighten section vertical padding for the page-wide major sections. */
+#comparison,
+#gallery {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+/* Wider container so videos extend closer to the page edges. */
+#comparison .comparison-container,
+#gallery .gallery-container {
+  max-width: 1400px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Comparison header card baseline picker styling. */
+.comparison-header-card .header-card-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  margin-bottom: 0.5rem;
+}
+
+.comparison-header-card .header-card-label {
+  margin-bottom: 0;
+}
+
+.scene-picker,
+.baseline-picker {
+  margin-bottom: 0.75rem !important;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.scene-picker .button.is-active,
+.baseline-picker .button.is-active {
+  background-color: hsl(204, 86%, 53%);
+  color: white;
+  border-color: hsl(204, 86%, 47%);
+}
+
+.row-takeaway {
+  text-align: center;
+  margin-top: 0.5rem !important;
+  margin-bottom: 0 !important;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.row-method-title {
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 0.4rem !important;
+  color: #333;
+}
+
+.baseline-cell-label {
+  font-style: italic;
+  color: hsl(204, 86%, 40%);
+}
+
+/* Placeholder cell for the PCRP video that we don't have yet. */
+.pcrp-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  aspect-ratio: 720 / 480;
+  width: 100%;
+  background: #1c1c1f;
+  color: #ddd;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 0.9rem;
+  border-radius: 6px;
+  border: 1px dashed #444;
+}
+
+/* Visual divider between Real-world Edits and Showcase. */
+.section-divider {
+  border: none;
+  border-top: 1px solid #ddd;
+  margin: 2rem auto 1.5rem auto;
+  width: 60%;
+}
+
+/* Before/After slider used in the Showcase rows: PBR (left) <--> Relit (right) */
+.slider-cell {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 720 / 480;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #000;
+  user-select: none;
+  -webkit-user-select: none;
+  cursor: ew-resize;
+}
+
+.slider-cell video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  pointer-events: none;
+}
+
+/* The "after" (relit) video sits on top of the "before" (PBR) video and is
+   clipped on the right side via clip-path. We update --pos via JS. */
+.slider-cell .slider-after {
+  clip-path: inset(0 0 0 var(--pos, 50%));
+}
+
+.slider-cell .slider-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--pos, 50%);
+  width: 2px;
+  background: #fff;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
+  pointer-events: none;
+  transform: translateX(-1px);
+}
+
+.slider-cell .slider-knob {
+  position: absolute;
+  top: 50%;
+  left: var(--pos, 50%);
+  width: 28px;
+  height: 28px;
+  margin-left: -14px;
+  margin-top: -14px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid hsl(204, 86%, 47%);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: hsl(204, 86%, 40%);
+  pointer-events: none;
+}
+
+.slider-cell .slider-knob::before {
+  content: '\25C0\25B6';   /* ◀▶ */
+  letter-spacing: -2px;
+}
+
+.slider-cell .slider-label {
+  position: absolute;
+  top: 6px;
+  padding: 1px 6px;
+  font-size: 0.75rem;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  border-radius: 3px;
+  pointer-events: none;
+  font-family: 'Google Sans', sans-serif;
+}
+
+.slider-cell .slider-label.left { left: 6px; }
+.slider-cell .slider-label.right { right: 6px; }
+
+.slider-cell-caption {
+  text-align: center;
+  font-size: 0.7rem;
+  color: #888;
+  margin-top: 0.25rem;
+}
+
+/* Environment-map legend row sitting above the showcase scenes. */
+.envmap-legend {
+  margin-bottom: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0.25rem !important;
+  border-bottom: none !important;
+}
+
+.envmap-legend h5.title {
+  margin-bottom: 0.25rem !important;
+}
+
+.envmap-empty {
+  visibility: hidden;
+}
+
+.envmap-ball {
+  display: block;
+  margin: 0 auto;
+  width: 60%;
+  max-width: 120px;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  border-radius: 50%;
+  background: #000;
 }
 
 #pipeline figure.image img,
