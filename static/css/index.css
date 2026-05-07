@@ -223,3 +223,31 @@ body {
   margin: 0 auto;
   border-radius: 6px;
 }
+
+/* Tighten the section that holds the pipeline diagram so the figure is
+   not surrounded by huge whitespace. */
+#pipeline {
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+#pipeline .container {
+  max-width: 1200px;
+}
+#pipeline figure.image {
+  margin: 0 auto;
+}
+
+/* Sub-header chip used for "Synthetic Scenes" / "Real-world Scenes" groupings. */
+.scene-group-label {
+  display: inline-block;
+  margin: 0 auto 1.5rem auto;
+  padding: 0.35rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 999px;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #555;
+  background: #fafafa;
+}

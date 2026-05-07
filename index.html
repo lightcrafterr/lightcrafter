@@ -39,7 +39,7 @@
             PBR-Conditioned Video Diffusion Refinement for Controllable and Consistent Relighting
           </h1>
           <div class="is-size-5 publication-authors">
-            <span class="author-block">Anonymou Submission</span>
+            <span class="author-block">Anonymous Submission</span>
           </div>
 
           <!-- Paper / arXiv / Code / Data buttons hidden for anonymous submission.
@@ -87,8 +87,12 @@
         <img src="./static/images/teaser.png" alt="Teaser figure of our method.">
       </figure>
       <h2 class="subtitle has-text-centered" style="margin-top: 1.5rem;">
-        We relight in-the-wild videos under arbitrary target environments by
-        rendering a physically-based proxy and refining it with a video diffusion model.
+        Given an input video, <strong>LightCrafter</strong> utilizes inverse-rendered
+        photometric and geometric scene properties and refines a physically-based rendering
+        (PBR) proxy for video relighting control. The PBR rendering captures most of the
+        scene&ndash;light interaction, while a video diffusion model translates the rendering
+        to a photorealistic relit video with coherent shadows, reflections, materials, and
+        light sources.
       </h2>
     </div>
   </div>
@@ -154,12 +158,12 @@
         <div class="content has-text-justified" style="margin-top: 1.5rem;">
           <p>
             <strong>Overview of the proposed method.</strong>
-            Our method recovers a relightable scene state from an input video, including photometric
-            properties, geometry, camera motion, and illumination, and uses it to render a frame-aligned
-            PBR render under user-specified edits. The rendering provides an explicit interface for
-            environment relighting, indoor light insertion, and G-buffer or scene-state editing, while a
-            video diffusion refiner removes artifacts from imperfect inverse rendering and produces a
-            photorealistic, temporally coherent relit video.
+            Our method recovers a relightable scene state from an input video, including
+            photometric properties, geometry, camera motion, and illumination, and uses it to
+            render a frame-aligned PBR render. The rendering provides an explicit interface for
+            environment relighting, indoor light insertion, and G-buffer or scene-state editing,
+            while a video diffusion refiner removes artifacts from imperfect PBR renders and
+            produces a photorealistic, temporally coherent relit video.
           </p>
         </div>
       </div>
@@ -180,17 +184,21 @@
             <a href="#">LightX</a>,
             <a href="#">Diffusion-Renderer (DR)</a>, and
             <a href="#">UniRelight</a>
-            across five evaluation settings (S1&ndash;S5).
-            For each setting we show the input video, the target environment map (placeholder),
-            and a side-by-side relighting result from every method.
+            on three synthetic and two real-world scenes.
+            Each row shows the source video, the target relighting,
+            and side-by-side outputs from every method.
           </p>
         </div>
       </div>
     </div>
 
+
+    <div class="has-text-centered">
+      <span class="scene-group-label">Synthetic Scenes</span>
+    </div>
     <!-- s1 -->
     <div class="comparison-card" id="s1" style="--cols: 7;">
-      <h3 class="title is-4">Setting 1</h3>
+      <h4 class="title is-5">Scene 1</h4>
       <div class="columns is-multiline is-centered is-mobile">
         <div class="column is-2-tablet is-6-mobile has-text-centered">
           <h5 class="title is-6">Source</h5>
@@ -223,7 +231,7 @@
           </video>
         </div>
         <div class="column is-2-tablet is-6-mobile has-text-centered">
-          <h5 class="title is-6">PBR (Ours)</h5>
+          <h5 class="title is-6">PBR</h5>
           <video autoplay muted loop playsinline class="comparison-video">
             <source src="./static/videos/comparison/s1/pbr.mp4" type="video/mp4">
           </video>
@@ -239,7 +247,7 @@
 
     <!-- s2 -->
     <div class="comparison-card" id="s2" style="--cols: 7;">
-      <h3 class="title is-4">Setting 2</h3>
+      <h4 class="title is-5">Scene 2</h4>
       <div class="columns is-multiline is-centered is-mobile">
         <div class="column is-2-tablet is-6-mobile has-text-centered">
           <h5 class="title is-6">Source</h5>
@@ -272,7 +280,7 @@
           </video>
         </div>
         <div class="column is-2-tablet is-6-mobile has-text-centered">
-          <h5 class="title is-6">PBR (Ours)</h5>
+          <h5 class="title is-6">PBR</h5>
           <video autoplay muted loop playsinline class="comparison-video">
             <source src="./static/videos/comparison/s2/pbr.mp4" type="video/mp4">
           </video>
@@ -288,7 +296,7 @@
 
     <!-- s3 -->
     <div class="comparison-card" id="s3" style="--cols: 7;">
-      <h3 class="title is-4">Setting 3</h3>
+      <h4 class="title is-5">Scene 3</h4>
       <div class="columns is-multiline is-centered is-mobile">
         <div class="column is-2-tablet is-6-mobile has-text-centered">
           <h5 class="title is-6">Source</h5>
@@ -321,7 +329,7 @@
           </video>
         </div>
         <div class="column is-2-tablet is-6-mobile has-text-centered">
-          <h5 class="title is-6">PBR (Ours)</h5>
+          <h5 class="title is-6">PBR</h5>
           <video autoplay muted loop playsinline class="comparison-video">
             <source src="./static/videos/comparison/s3/pbr.mp4" type="video/mp4">
           </video>
@@ -335,9 +343,13 @@
       </div>
     </div>
 
+
+    <div class="has-text-centered" style="margin-top: 2.5rem;">
+      <span class="scene-group-label">Real-world Scenes</span>
+    </div>
     <!-- s4 -->
     <div class="comparison-card" id="s4" style="--cols: 7;">
-      <h3 class="title is-4">Setting 4</h3>
+      <h4 class="title is-5">Scene 1</h4>
       <div class="columns is-multiline is-centered is-mobile">
         <div class="column is-2-tablet is-6-mobile has-text-centered">
           <h5 class="title is-6">Source</h5>
@@ -370,7 +382,7 @@
           </video>
         </div>
         <div class="column is-2-tablet is-6-mobile has-text-centered">
-          <h5 class="title is-6">PBR (Ours)</h5>
+          <h5 class="title is-6">PBR</h5>
           <video autoplay muted loop playsinline class="comparison-video">
             <source src="./static/videos/comparison/s4/pbr.mp4" type="video/mp4">
           </video>
@@ -386,7 +398,7 @@
 
     <!-- s5 -->
     <div class="comparison-card" id="s5" style="--cols: 7;">
-      <h3 class="title is-4">Setting 5 <span class="is-size-7 has-text-grey">(static frames)</span></h3>
+      <h4 class="title is-5">Scene 2 <span class="is-size-7 has-text-grey">(static frames)</span></h4>
       <div class="columns is-multiline is-centered is-mobile">
         <div class="column is-2-tablet is-6-mobile has-text-centered">
           <h5 class="title is-6">Source</h5>
@@ -409,7 +421,7 @@
           <img src="./static/videos/comparison/s5/unirelight.jpg" alt="s5 unirelight" class="comparison-video">
         </div>
         <div class="column is-2-tablet is-6-mobile has-text-centered">
-          <h5 class="title is-6">PBR (Ours)</h5>
+          <h5 class="title is-6">PBR</h5>
           <img src="./static/videos/comparison/s5/pbr.jpg" alt="s5 pbr" class="comparison-video">
         </div>
         <div class="column is-2-tablet is-6-mobile has-text-centered">
@@ -452,7 +464,7 @@
           </video>
         </div>
         <div class="column has-text-centered">
-          <h5 class="title is-6">PBR (Ours)</h5>
+          <h5 class="title is-6">PBR</h5>
           <video autoplay muted loop playsinline class="gallery-video">
             <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_1/pbr.mp4" type="video/mp4">
           </video>
@@ -491,7 +503,7 @@
           </video>
         </div>
         <div class="column has-text-centered">
-          <h5 class="title is-6">PBR (Ours)</h5>
+          <h5 class="title is-6">PBR</h5>
           <video autoplay muted loop playsinline class="gallery-video">
             <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_7/pbr.mp4" type="video/mp4">
           </video>
@@ -530,7 +542,7 @@
           </video>
         </div>
         <div class="column has-text-centered">
-          <h5 class="title is-6">PBR (Ours)</h5>
+          <h5 class="title is-6">PBR</h5>
           <video autoplay muted loop playsinline class="gallery-video">
             <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_9/pbr.mp4" type="video/mp4">
           </video>
@@ -569,7 +581,7 @@
           </video>
         </div>
         <div class="column has-text-centered">
-          <h5 class="title is-6">PBR (Ours)</h5>
+          <h5 class="title is-6">PBR</h5>
           <video autoplay muted loop playsinline class="gallery-video">
             <source src="./static/videos/gallery/in-the-wild-scene-paper/europe_building/pbr.mp4" type="video/mp4">
           </video>
@@ -608,7 +620,7 @@
           </video>
         </div>
         <div class="column has-text-centered">
-          <h5 class="title is-6">PBR (Ours)</h5>
+          <h5 class="title is-6">PBR</h5>
           <video autoplay muted loop playsinline class="gallery-video">
             <source src="./static/videos/gallery/in-the-wild-scene-paper/temple/pbr.mp4" type="video/mp4">
           </video>
@@ -647,7 +659,7 @@
           </video>
         </div>
         <div class="column has-text-centered">
-          <h5 class="title is-6">PBR (Ours)</h5>
+          <h5 class="title is-6">PBR</h5>
           <video autoplay muted loop playsinline class="gallery-video">
             <source src="./static/videos/gallery/old-vintage-car/pbr.mp4" type="video/mp4">
           </video>
@@ -687,7 +699,7 @@
           </video>
         </div>
         <div class="column has-text-centered">
-          <h5 class="title is-6">PBR (Ours)</h5>
+          <h5 class="title is-6">PBR</h5>
           <video autoplay muted loop playsinline class="gallery-video">
             <source src="./static/videos/gallery/human/pbr.mp4" type="video/mp4">
           </video>
@@ -711,7 +723,7 @@
           </video>
         </div>
         <div class="column has-text-centered">
-          <h5 class="title is-6">PBR (Ours)</h5>
+          <h5 class="title is-6">PBR</h5>
           <video autoplay muted loop playsinline class="gallery-video">
             <source src="./static/videos/gallery/lalaland/pbr.mp4" type="video/mp4">
           </video>
@@ -729,7 +741,7 @@
       <h3 class="title is-4">Car (Headlights at Night)</h3>
       <div class="columns is-centered is-mobile">
         <div class="column has-text-centered">
-          <h5 class="title is-6">PBR (Ours)</h5>
+          <h5 class="title is-6">PBR</h5>
           <video autoplay muted loop playsinline class="gallery-video">
             <source src="./static/videos/gallery/car/pbr.mp4" type="video/mp4">
           </video>
