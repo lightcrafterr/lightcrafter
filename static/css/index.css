@@ -199,6 +199,46 @@ body {
   object-fit: contain;
 }
 
+/* Gallery PBR rows: chrome envmap ball as image overlay (same corner layout as Dancing). */
+#gallery-lalaland .gallery-envmap-overlay-wrap,
+#gallery-human .gallery-envmap-overlay-wrap,
+#gallery-car-light .gallery-envmap-overlay-wrap {
+  position: relative;
+  display: block;
+  width: 100%;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #000;
+  line-height: 0;
+}
+
+#gallery-lalaland .gallery-envmap-overlay-wrap > video.gallery-video,
+#gallery-human .gallery-envmap-overlay-wrap > video.gallery-video,
+#gallery-car-light .gallery-envmap-overlay-wrap > video.gallery-video {
+  border-radius: 0;
+}
+
+#gallery-lalaland .gallery-envmap-overlay,
+#gallery-human .gallery-envmap-overlay,
+#gallery-car-light .gallery-envmap-overlay {
+  position: absolute;
+  pointer-events: none;
+  top: var(--gallery-envmap-top, 0.5%);
+  left: var(--gallery-envmap-left, 0.5%);
+  width: var(--gallery-envmap-size, 10%);
+  max-width: 72px;
+  height: auto;
+  z-index: 2;
+  border-radius: 50%;
+}
+
+/* Back-compat: older variable name on La La Land card */
+#gallery-lalaland {
+  --gallery-envmap-top: var(--lalaland-envmap-top, 0.5%);
+  --gallery-envmap-left: var(--lalaland-envmap-left, 0.5%);
+  --gallery-envmap-size: var(--lalaland-envmap-size, 10%);
+}
+
 /* CSS grid for fixed-column layouts (var(--cols) per card). */
 .comparison-card > .columns,
 .gallery-card.is-grid > .columns {

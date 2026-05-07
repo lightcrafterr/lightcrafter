@@ -397,9 +397,14 @@
         </div>
         <div class="column has-text-centered">
           <h5 class="title is-6">PBR</h5>
-          <video autoplay muted loop playsinline class="gallery-video">
-            <source src="./static/videos/gallery/lalaland/pbr.mp4?v=7" type="video/mp4">
-          </video>
+          <div class="gallery-envmap-overlay-wrap">
+            <video autoplay muted loop playsinline class="gallery-video">
+              <source src="./static/videos/gallery/lalaland/pbr.mp4?v=14" type="video/mp4">
+            </video>
+            <img class="gallery-envmap-overlay"
+                 src="./static/images/kiara_5_noon_ball_ovl.png?v=1"
+                 alt="Environment map (kiara_5_noon) chrome ball.">
+          </div>
         </div>
         <div class="column has-text-centered">
           <h5 class="title is-6">Relit</h5>
@@ -417,19 +422,24 @@
         <div class="column has-text-centered">
           <h5 class="title is-6">Input</h5>
           <video autoplay muted loop playsinline class="gallery-video">
-            <source src="./static/videos/gallery/human/input.mp4?v=7" type="video/mp4">
+            <source src="./static/videos/gallery/human/input.mp4?v=12" type="video/mp4">
           </video>
         </div>
         <div class="column has-text-centered">
           <h5 class="title is-6">PBR</h5>
-          <video autoplay muted loop playsinline class="gallery-video">
-            <source src="./static/videos/gallery/human/pbr.mp4?v=8" type="video/mp4">
-          </video>
+          <div class="gallery-envmap-overlay-wrap">
+            <video autoplay muted loop playsinline class="gallery-video">
+              <source src="./static/videos/gallery/human/pbr.mp4?v=12" type="video/mp4">
+            </video>
+            <img class="gallery-envmap-overlay"
+                 src="./static/images/envmaps/kiara_5_noon_2k_ball.png?v=2"
+                 alt="Environment map (kiara_5_noon) chrome ball.">
+          </div>
         </div>
         <div class="column has-text-centered">
           <h5 class="title is-6">Relit</h5>
           <video autoplay muted loop playsinline class="gallery-video">
-            <source src="./static/videos/gallery/human/relit.mp4?v=7" type="video/mp4">
+            <source src="./static/videos/gallery/human/relit.mp4?v=12" type="video/mp4">
           </video>
         </div>
       </div>
@@ -448,13 +458,13 @@
         <div class="column has-text-centered">
           <h5 class="title is-6">PBR</h5>
           <video autoplay muted loop playsinline class="gallery-video">
-            <source src="./static/videos/gallery/indoor-light-insertion/pbr.mp4?v=4" type="video/mp4">
+            <source src="./static/videos/gallery/indoor-light-insertion/pbr.mp4?v=16" type="video/mp4">
           </video>
         </div>
         <div class="column has-text-centered">
           <h5 class="title is-6">Relit</h5>
           <video autoplay muted loop playsinline class="gallery-video">
-            <source src="./static/videos/gallery/indoor-light-insertion/relit.mp4?v=4" type="video/mp4">
+            <source src="./static/videos/gallery/indoor-light-insertion/relit.mp4?v=16" type="video/mp4">
           </video>
         </div>
       </div>
@@ -467,19 +477,24 @@
         <div class="column has-text-centered">
           <h5 class="title is-6">Input</h5>
           <video autoplay muted loop playsinline class="gallery-video">
-            <source src="./static/videos/gallery/car-light-insertion/input.mp4?v=7" type="video/mp4">
+            <source src="./static/videos/gallery/car-light-insertion/input.mp4?v=9" type="video/mp4">
           </video>
         </div>
         <div class="column has-text-centered">
           <h5 class="title is-6">PBR</h5>
-          <video autoplay muted loop playsinline class="gallery-video">
-            <source src="./static/videos/gallery/car-light-insertion/pbr.mp4?v=7" type="video/mp4">
-          </video>
+          <div class="gallery-envmap-overlay-wrap">
+            <video autoplay muted loop playsinline class="gallery-video">
+              <source src="./static/videos/gallery/car-light-insertion/pbr.mp4?v=9" type="video/mp4">
+            </video>
+            <img class="gallery-envmap-overlay"
+                 src="./static/images/envmaps/satara_night_no_lamps_2k_ball.png?v=2"
+                 alt="Environment map (satara_night_no_lamps) chrome ball.">
+          </div>
         </div>
         <div class="column has-text-centered">
           <h5 class="title is-6">Relit</h5>
           <video autoplay muted loop playsinline class="gallery-video">
-            <source src="./static/videos/gallery/car-light-insertion/relit.mp4?v=7" type="video/mp4">
+            <source src="./static/videos/gallery/car-light-insertion/relit.mp4?v=9" type="video/mp4">
           </video>
         </div>
       </div>
@@ -494,24 +509,20 @@
         <div class="content has-text-justified">
           <p>
             Multi-illumination relighting on a variety of scenes. Each row shows the
-            source video, our PBR proxy, and three relit targets; drag the vertical
-            handle on each relit panel to compare <strong>PBR</strong> (left) vs
-            <strong>Relit</strong> (right). Chrome-ball previews of the three
-            environment maps are aligned with Illum 1&ndash;3 in the row directly
-            below this text.
+            source video and three relit targets; drag the vertical handle on each panel
+            to compare <strong>PBR</strong> (left) vs <strong>Relit</strong> (right).
+            The PBR side uses the proxy rendered under that column&rsquo;s target
+            environment. Chrome-ball previews align with Illum 1&ndash;3 in the row below.
           </p>
         </div>
       </div>
     </div>
 
     <!-- Target environment maps (align with Illum 1&ndash;3 columns below) -->
-    <div class="gallery-card is-grid showcase-envmap-legend envmap-legend" style="--cols: 5;">
+    <div class="gallery-card is-grid showcase-envmap-legend envmap-legend" style="--cols: 4;">
       <div class="columns is-multiline is-centered is-mobile">
         <div class="column has-text-centered showcase-envmap-legend-spacer">
           <h5 class="title is-6">Input</h5>
-        </div>
-        <div class="column has-text-centered showcase-envmap-legend-spacer">
-          <h5 class="title is-6">PBR</h5>
         </div>
         <div class="column has-text-centered">
           <h5 class="title is-6">Illum 1</h5>
@@ -537,8 +548,8 @@
       </div>
     </div>
 
-    <!-- Showcase row 1: Driving Scene 1 (5-col) -->
-    <div class="gallery-card is-grid" id="gallery-scene-1" style="--cols: 5;">
+    <!-- Showcase row 1: Driving Scene 1 (4-col) -->
+    <div class="gallery-card is-grid" id="gallery-scene-1" style="--cols: 4;">
       <h3 class="title is-4">Driving Scene 1</h3>
       <div class="columns is-multiline is-centered is-mobile">
         <div class="column has-text-centered">
@@ -548,16 +559,10 @@
           </video>
         </div>
         <div class="column has-text-centered">
-          <h5 class="title is-6">PBR</h5>
-          <video autoplay muted loop playsinline class="gallery-video">
-            <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_1/pbr.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column has-text-centered">
           <h5 class="title is-6">Relit (Illum 1)</h5>
           <div class="slider-cell" style="--pos: 50%;">
             <video autoplay muted loop playsinline class="gallery-video slider-before">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_1/pbr.mp4" type="video/mp4">
+              <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_1/illum1_pbr.mp4?v=11" type="video/mp4">
             </video>
             <video autoplay muted loop playsinline class="gallery-video slider-after">
               <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_1/illum1.mp4" type="video/mp4">
@@ -573,7 +578,7 @@
           <h5 class="title is-6">Relit (Illum 2)</h5>
           <div class="slider-cell" style="--pos: 50%;">
             <video autoplay muted loop playsinline class="gallery-video slider-before">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_1/pbr.mp4" type="video/mp4">
+              <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_1/illum2_pbr.mp4?v=11" type="video/mp4">
             </video>
             <video autoplay muted loop playsinline class="gallery-video slider-after">
               <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_1/illum2.mp4" type="video/mp4">
@@ -589,7 +594,7 @@
           <h5 class="title is-6">Relit (Illum 3)</h5>
           <div class="slider-cell" style="--pos: 50%;">
             <video autoplay muted loop playsinline class="gallery-video slider-before">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_1/pbr.mp4" type="video/mp4">
+              <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_1/illum3_pbr.mp4?v=11" type="video/mp4">
             </video>
             <video autoplay muted loop playsinline class="gallery-video slider-after">
               <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_1/illum3.mp4" type="video/mp4">
@@ -604,7 +609,7 @@
       </div>
     </div>
 
-    <div class="gallery-card is-grid" id="gallery-scene-7" style="--cols: 5;">
+    <div class="gallery-card is-grid" id="gallery-scene-7" style="--cols: 4;">
       <h3 class="title is-4">Driving Scene 2</h3>
       <div class="columns is-multiline is-centered is-mobile">
         <div class="column has-text-centered">
@@ -614,16 +619,10 @@
           </video>
         </div>
         <div class="column has-text-centered">
-          <h5 class="title is-6">PBR</h5>
-          <video autoplay muted loop playsinline class="gallery-video">
-            <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_7/pbr.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column has-text-centered">
           <h5 class="title is-6">Relit (Illum 1)</h5>
           <div class="slider-cell" style="--pos: 50%;">
             <video autoplay muted loop playsinline class="gallery-video slider-before">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_7/pbr.mp4" type="video/mp4">
+              <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_7/illum1_pbr.mp4?v=11" type="video/mp4">
             </video>
             <video autoplay muted loop playsinline class="gallery-video slider-after">
               <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_7/illum1.mp4" type="video/mp4">
@@ -639,7 +638,7 @@
           <h5 class="title is-6">Relit (Illum 2)</h5>
           <div class="slider-cell" style="--pos: 50%;">
             <video autoplay muted loop playsinline class="gallery-video slider-before">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_7/pbr.mp4" type="video/mp4">
+              <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_7/illum2_pbr.mp4?v=11" type="video/mp4">
             </video>
             <video autoplay muted loop playsinline class="gallery-video slider-after">
               <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_7/illum2.mp4" type="video/mp4">
@@ -655,7 +654,7 @@
           <h5 class="title is-6">Relit (Illum 3)</h5>
           <div class="slider-cell" style="--pos: 50%;">
             <video autoplay muted loop playsinline class="gallery-video slider-before">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_7/pbr.mp4" type="video/mp4">
+              <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_7/illum3_pbr.mp4?v=11" type="video/mp4">
             </video>
             <video autoplay muted loop playsinline class="gallery-video slider-after">
               <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_7/illum3.mp4" type="video/mp4">
@@ -670,7 +669,7 @@
       </div>
     </div>
 
-    <div class="gallery-card is-grid" id="gallery-scene-9" style="--cols: 5;">
+    <div class="gallery-card is-grid" id="gallery-scene-9" style="--cols: 4;">
       <h3 class="title is-4">Driving Scene 3</h3>
       <div class="columns is-multiline is-centered is-mobile">
         <div class="column has-text-centered">
@@ -680,16 +679,10 @@
           </video>
         </div>
         <div class="column has-text-centered">
-          <h5 class="title is-6">PBR</h5>
-          <video autoplay muted loop playsinline class="gallery-video">
-            <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_9/pbr.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column has-text-centered">
           <h5 class="title is-6">Relit (Illum 1)</h5>
           <div class="slider-cell" style="--pos: 50%;">
             <video autoplay muted loop playsinline class="gallery-video slider-before">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_9/pbr.mp4" type="video/mp4">
+              <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_9/illum1_pbr.mp4?v=11" type="video/mp4">
             </video>
             <video autoplay muted loop playsinline class="gallery-video slider-after">
               <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_9/illum1.mp4" type="video/mp4">
@@ -705,7 +698,7 @@
           <h5 class="title is-6">Relit (Illum 2)</h5>
           <div class="slider-cell" style="--pos: 50%;">
             <video autoplay muted loop playsinline class="gallery-video slider-before">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_9/pbr.mp4" type="video/mp4">
+              <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_9/illum2_pbr.mp4?v=11" type="video/mp4">
             </video>
             <video autoplay muted loop playsinline class="gallery-video slider-after">
               <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_9/illum2.mp4" type="video/mp4">
@@ -721,7 +714,7 @@
           <h5 class="title is-6">Relit (Illum 3)</h5>
           <div class="slider-cell" style="--pos: 50%;">
             <video autoplay muted loop playsinline class="gallery-video slider-before">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_9/pbr.mp4" type="video/mp4">
+              <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_9/illum3_pbr.mp4?v=11" type="video/mp4">
             </video>
             <video autoplay muted loop playsinline class="gallery-video slider-after">
               <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_9/illum3.mp4" type="video/mp4">
@@ -736,7 +729,7 @@
       </div>
     </div>
 
-    <div class="gallery-card is-grid" id="gallery-europe-building" style="--cols: 5;">
+    <div class="gallery-card is-grid" id="gallery-europe-building" style="--cols: 4;">
       <h3 class="title is-4">European Building</h3>
       <div class="columns is-multiline is-centered is-mobile">
         <div class="column has-text-centered">
@@ -746,16 +739,10 @@
           </video>
         </div>
         <div class="column has-text-centered">
-          <h5 class="title is-6">PBR</h5>
-          <video autoplay muted loop playsinline class="gallery-video">
-            <source src="./static/videos/gallery/in-the-wild-scene-paper/europe_building/pbr.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column has-text-centered">
           <h5 class="title is-6">Relit (Illum 1)</h5>
           <div class="slider-cell" style="--pos: 50%;">
             <video autoplay muted loop playsinline class="gallery-video slider-before">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/europe_building/pbr.mp4" type="video/mp4">
+              <source src="./static/videos/gallery/in-the-wild-scene-paper/europe_building/illum1_pbr.mp4?v=11" type="video/mp4">
             </video>
             <video autoplay muted loop playsinline class="gallery-video slider-after">
               <source src="./static/videos/gallery/in-the-wild-scene-paper/europe_building/illum1.mp4" type="video/mp4">
@@ -771,7 +758,7 @@
           <h5 class="title is-6">Relit (Illum 2)</h5>
           <div class="slider-cell" style="--pos: 50%;">
             <video autoplay muted loop playsinline class="gallery-video slider-before">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/europe_building/pbr.mp4" type="video/mp4">
+              <source src="./static/videos/gallery/in-the-wild-scene-paper/europe_building/illum2_pbr.mp4?v=11" type="video/mp4">
             </video>
             <video autoplay muted loop playsinline class="gallery-video slider-after">
               <source src="./static/videos/gallery/in-the-wild-scene-paper/europe_building/illum2.mp4" type="video/mp4">
@@ -787,7 +774,7 @@
           <h5 class="title is-6">Relit (Illum 3)</h5>
           <div class="slider-cell" style="--pos: 50%;">
             <video autoplay muted loop playsinline class="gallery-video slider-before">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/europe_building/pbr.mp4" type="video/mp4">
+              <source src="./static/videos/gallery/in-the-wild-scene-paper/europe_building/illum3_pbr.mp4?v=11" type="video/mp4">
             </video>
             <video autoplay muted loop playsinline class="gallery-video slider-after">
               <source src="./static/videos/gallery/in-the-wild-scene-paper/europe_building/illum3.mp4" type="video/mp4">
@@ -802,7 +789,7 @@
       </div>
     </div>
 
-    <div class="gallery-card is-grid" id="gallery-temple" style="--cols: 5;">
+    <div class="gallery-card is-grid" id="gallery-temple" style="--cols: 4;">
       <h3 class="title is-4">Temple</h3>
       <div class="columns is-multiline is-centered is-mobile">
         <div class="column has-text-centered">
@@ -812,16 +799,10 @@
           </video>
         </div>
         <div class="column has-text-centered">
-          <h5 class="title is-6">PBR</h5>
-          <video autoplay muted loop playsinline class="gallery-video">
-            <source src="./static/videos/gallery/in-the-wild-scene-paper/temple/pbr.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column has-text-centered">
           <h5 class="title is-6">Relit (Illum 1)</h5>
           <div class="slider-cell" style="--pos: 50%;">
             <video autoplay muted loop playsinline class="gallery-video slider-before">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/temple/pbr.mp4" type="video/mp4">
+              <source src="./static/videos/gallery/in-the-wild-scene-paper/temple/illum1_pbr.mp4?v=11" type="video/mp4">
             </video>
             <video autoplay muted loop playsinline class="gallery-video slider-after">
               <source src="./static/videos/gallery/in-the-wild-scene-paper/temple/illum1.mp4" type="video/mp4">
@@ -837,7 +818,7 @@
           <h5 class="title is-6">Relit (Illum 2)</h5>
           <div class="slider-cell" style="--pos: 50%;">
             <video autoplay muted loop playsinline class="gallery-video slider-before">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/temple/pbr.mp4" type="video/mp4">
+              <source src="./static/videos/gallery/in-the-wild-scene-paper/temple/illum2_pbr.mp4?v=11" type="video/mp4">
             </video>
             <video autoplay muted loop playsinline class="gallery-video slider-after">
               <source src="./static/videos/gallery/in-the-wild-scene-paper/temple/illum2.mp4" type="video/mp4">
@@ -853,7 +834,7 @@
           <h5 class="title is-6">Relit (Illum 3)</h5>
           <div class="slider-cell" style="--pos: 50%;">
             <video autoplay muted loop playsinline class="gallery-video slider-before">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/temple/pbr.mp4" type="video/mp4">
+              <source src="./static/videos/gallery/in-the-wild-scene-paper/temple/illum3_pbr.mp4?v=11" type="video/mp4">
             </video>
             <video autoplay muted loop playsinline class="gallery-video slider-after">
               <source src="./static/videos/gallery/in-the-wild-scene-paper/temple/illum3.mp4" type="video/mp4">
@@ -868,29 +849,23 @@
       </div>
     </div>
 
-    <div class="gallery-card is-grid" id="gallery-old-vintage-car" style="--cols: 5;">
+    <div class="gallery-card is-grid" id="gallery-old-vintage-car" style="--cols: 4;">
       <h3 class="title is-4">Old Vintage Car</h3>
       <div class="columns is-multiline is-centered is-mobile">
         <div class="column has-text-centered">
           <h5 class="title is-6">Input</h5>
           <video autoplay muted loop playsinline class="gallery-video">
-            <source src="./static/videos/gallery/old-vintage-car/input.mp4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column has-text-centered">
-          <h5 class="title is-6">PBR</h5>
-          <video autoplay muted loop playsinline class="gallery-video">
-            <source src="./static/videos/gallery/old-vintage-car/pbr.mp4" type="video/mp4">
+            <source src="./static/videos/gallery/old-vintage-car/input.mp4?v=10" type="video/mp4">
           </video>
         </div>
         <div class="column has-text-centered">
           <h5 class="title is-6">Relit (Illum 1)</h5>
           <div class="slider-cell" style="--pos: 50%;">
             <video autoplay muted loop playsinline class="gallery-video slider-before">
-              <source src="./static/videos/gallery/old-vintage-car/pbr.mp4" type="video/mp4">
+              <source src="./static/videos/gallery/old-vintage-car/pbr_illum1.mp4?v=10" type="video/mp4">
             </video>
             <video autoplay muted loop playsinline class="gallery-video slider-after">
-              <source src="./static/videos/gallery/old-vintage-car/illum1.mp4" type="video/mp4">
+              <source src="./static/videos/gallery/old-vintage-car/illum1.mp4?v=10" type="video/mp4">
             </video>
             <span class="slider-label left">PBR</span>
             <span class="slider-label right">Relit</span>
@@ -903,10 +878,10 @@
           <h5 class="title is-6">Relit (Illum 2)</h5>
           <div class="slider-cell" style="--pos: 50%;">
             <video autoplay muted loop playsinline class="gallery-video slider-before">
-              <source src="./static/videos/gallery/old-vintage-car/pbr.mp4" type="video/mp4">
+              <source src="./static/videos/gallery/old-vintage-car/pbr_illum2.mp4?v=10" type="video/mp4">
             </video>
             <video autoplay muted loop playsinline class="gallery-video slider-after">
-              <source src="./static/videos/gallery/old-vintage-car/illum2.mp4" type="video/mp4">
+              <source src="./static/videos/gallery/old-vintage-car/illum2.mp4?v=10" type="video/mp4">
             </video>
             <span class="slider-label left">PBR</span>
             <span class="slider-label right">Relit</span>
@@ -919,10 +894,10 @@
           <h5 class="title is-6">Relit (Illum 3)</h5>
           <div class="slider-cell" style="--pos: 50%;">
             <video autoplay muted loop playsinline class="gallery-video slider-before">
-              <source src="./static/videos/gallery/old-vintage-car/pbr.mp4" type="video/mp4">
+              <source src="./static/videos/gallery/old-vintage-car/pbr_illum3.mp4?v=10" type="video/mp4">
             </video>
             <video autoplay muted loop playsinline class="gallery-video slider-after">
-              <source src="./static/videos/gallery/old-vintage-car/illum3.mp4" type="video/mp4">
+              <source src="./static/videos/gallery/old-vintage-car/illum3.mp4?v=10" type="video/mp4">
             </video>
             <span class="slider-label left">PBR</span>
             <span class="slider-label right">Relit</span>
