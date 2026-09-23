@@ -264,16 +264,23 @@ body {
 }
 
 /* Tighten section vertical padding for the page-wide major sections. */
+#applications,
 #comparison,
 #gallery {
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
 }
 
-/* Wider container so videos extend closer to the page edges. */
-#comparison .comparison-container,
-#gallery .gallery-container {
+#comparison .comparison-container {
   max-width: 1400px;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+/* Keep the application + additional-result videos from spanning the whole page. */
+#applications .gallery-container,
+#gallery .gallery-container {
+  max-width: 1080px;
   padding-left: 1rem;
   padding-right: 1rem;
 }
@@ -485,6 +492,222 @@ body {
   margin-top: 0.15rem;
 }
 
+/* ---- Video teaser grid (hero): Input | G-buffer | PBR <-> Relit slider ---- */
+.teaser-video-wrap {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.teaser-grid {
+  width: 100%;
+}
+
+.teaser-headrow,
+.teaser-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.4rem;
+  align-items: stretch;
+}
+
+.teaser-headrow {
+  margin-bottom: 0.35rem;
+}
+
+.teaser-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0.4rem;
+  text-align: center;
+  font-family: 'Google Sans', sans-serif;
+  font-weight: 600;
+  font-size: 0.95rem;
+  line-height: 1.25;
+  color: #333;
+}
+/* Keep the three column titles on a shared top baseline; balance long wraps. */
+.teaser-head > span,
+.teaser-head:not(.ir-head) {
+  text-wrap: balance;
+}
+
+.teaser-row {
+  margin-bottom: 0.4rem;
+}
+
+.teaser-cell {
+  position: relative;
+}
+
+.teaser-cell > video.teaser-video,
+.teaser-gbuffer {
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  display: block;
+  border-radius: 6px;
+  background: #000;
+}
+
+/* Inverse-rendering / G-buffer placeholder until the clips are provided. */
+.teaser-gbuffer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #1c1c1f;
+  color: #9aa0b0;
+  border: 1px dashed #555;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.3;
+}
+.teaser-gbuffer small {
+  color: #6b7280;
+  font-size: 0.72rem;
+}
+
+/* Inverse-rendering cell: 4 G-buffers shown at once in draggable diagonal bands.
+   --shift (set via JS drag) moves all 3 boundaries together. */
+.teaser-quad {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #000;
+  cursor: ew-resize;
+  user-select: none;
+  -webkit-user-select: none;
+}
+.teaser-quad video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+/* Four parallelogram bands split by 3 parallel diagonals (~20deg from vertical). */
+.teaser-quad video:nth-of-type(1) { clip-path: polygon(0 0, calc(37% + var(--shift,0%)) 0, calc(13% + var(--shift,0%)) 100%, 0 100%); }
+.teaser-quad video:nth-of-type(2) { clip-path: polygon(calc(37% + var(--shift,0%)) 0, calc(62% + var(--shift,0%)) 0, calc(38% + var(--shift,0%)) 100%, calc(13% + var(--shift,0%)) 100%); }
+.teaser-quad video:nth-of-type(3) { clip-path: polygon(calc(62% + var(--shift,0%)) 0, calc(87% + var(--shift,0%)) 0, calc(63% + var(--shift,0%)) 100%, calc(38% + var(--shift,0%)) 100%); }
+.teaser-quad video:nth-of-type(4) { clip-path: polygon(calc(87% + var(--shift,0%)) 0, 100% 0, 100% 100%, calc(63% + var(--shift,0%)) 100%); }
+
+/* Thin diagonal dividers — same geometry as the bands, so always aligned. */
+.teaser-quad .qdiv {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, .9);
+  pointer-events: none;
+}
+.teaser-quad .qdiv1 { clip-path: polygon(calc(37% + var(--shift,0%)) 0, calc(37.5% + var(--shift,0%)) 0, calc(13.5% + var(--shift,0%)) 100%, calc(13% + var(--shift,0%)) 100%); }
+.teaser-quad .qdiv2 { clip-path: polygon(calc(62% + var(--shift,0%)) 0, calc(62.5% + var(--shift,0%)) 0, calc(38.5% + var(--shift,0%)) 100%, calc(38% + var(--shift,0%)) 100%); }
+.teaser-quad .qdiv3 { clip-path: polygon(calc(87% + var(--shift,0%)) 0, calc(87.5% + var(--shift,0%)) 0, calc(63.5% + var(--shift,0%)) 100%, calc(63% + var(--shift,0%)) 100%); }
+
+/* Drag knob sits on the middle divider. */
+.teaser-quad .qknob {
+  position: absolute;
+  top: 50%;
+  left: calc(50% + var(--shift,0%));
+  width: 26px;
+  height: 26px;
+  margin: -13px 0 0 -13px;
+  border-radius: 50%;
+  background: #fff;
+  border: 2px solid hsl(204, 86%, 47%);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  color: hsl(204, 86%, 40%);
+  pointer-events: none;
+}
+.teaser-quad .qknob::before { content: '\25C0\25B6'; letter-spacing: -2px; }
+
+/* Inverse-rendering cell: toggle between Appearance (G-buffer quad) and Geometry. */
+.teaser-ir {
+  position: relative;
+  aspect-ratio: 3 / 2;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #000;
+}
+.teaser-ir .teaser-quad {
+  position: absolute;
+  inset: 0;
+  aspect-ratio: auto;
+  border-radius: 0;
+}
+.teaser-ir .ir-geometry {
+  position: absolute;
+  inset: 0;
+}
+.teaser-ir .ir-geometry video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.teaser-recon-ph {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #1c1c1f;
+  color: #9aa0b0;
+  border: 1px dashed #555;
+  font-family: 'Google Sans', sans-serif;
+  font-size: 0.85rem;
+  line-height: 1.3;
+}
+.teaser-recon-ph small { color: #6b7280; font-size: 0.72rem; }
+
+/* Toggle visibility driven by data-ir-mode on the grid. */
+.teaser-grid[data-ir-mode="geometry"] .ir-appearance { display: none; }
+.teaser-grid[data-ir-mode="appearance"] .ir-geometry,
+.teaser-grid:not([data-ir-mode]) .ir-geometry { display: none; }
+
+/* Header label above the Appearance/Geometry toggle, both centered. */
+.ir-head {
+  gap: 0.45rem;
+}
+.ir-toggle {
+  margin: 0 !important;
+}
+.ir-toggle .button.is-active {
+  background-color: hsl(204, 86%, 53%);
+  color: white;
+  border-color: hsl(204, 86%, 47%);
+}
+
+/* The PBR<->Relit slider is one 3:2 column, matching the Input/G-buffer cells (no crop). */
+.teaser-slider {
+  position: relative;
+  aspect-ratio: 3 / 2;
+}
+.teaser-slider .teaser-slider-cell {
+  position: absolute;
+  inset: 0;
+  width: auto;
+  height: auto;
+  aspect-ratio: auto;
+}
+
+@media (max-width: 768px) {
+  .teaser-headrow,
+  .teaser-row {
+    grid-template-columns: 1fr;
+  }
+}
+
 #pipeline figure.image img,
 .teaser-image img {
   display: block;
@@ -504,6 +727,148 @@ body {
 }
 #pipeline figure.image {
   margin: 0 auto;
+}
+
+/* Author list: space the inline author blocks. */
+.publication-authors .author-block {
+  margin: 0 0.45rem;
+}
+.publication-authors + .publication-authors {
+  margin-top: 0.45rem;
+  font-size: 1rem;
+  color: #555;
+}
+
+/* ---- Synthetic comparison: controls on the side, compact slider ---- */
+.synthetic-compare {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 1.75rem;
+}
+
+.synthetic-compare .synthetic-controls {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.1rem;
+  flex: 0 0 auto;
+  width: 250px;
+  margin-bottom: 0;
+}
+
+.synthetic-compare .control-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.4rem;
+  width: 100%;
+}
+
+.synthetic-compare .control-label {
+  font-family: 'Google Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: #444;
+}
+
+.synthetic-compare .method-picker,
+.synthetic-compare .scene-picker {
+  margin-bottom: 0 !important;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 0.3rem;
+}
+
+/* Override has-addons joining so wrapped buttons read as separate chips. */
+.synthetic-compare .buttons.has-addons .button {
+  margin: 0 !important;
+  border-radius: 9999px !important;
+}
+
+/* Active state for the method/scene pickers (matches baseline-picker accent). */
+.method-picker .button.is-active {
+  background-color: hsl(204, 86%, 53%);
+  color: white;
+  border-color: hsl(204, 86%, 47%);
+}
+
+.method-picker .button.is-disabled,
+.method-picker .button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+/* Compact slider sized like the other figures, sitting beside the controls. */
+.synthetic-slider-wrap {
+  flex: 0 1 600px;
+  max-width: 600px;
+  margin: 0;
+}
+
+.synthetic-slider-cell {
+  width: 100%;
+}
+
+/* Stack controls above the slider on narrow screens. */
+@media (max-width: 768px) {
+  .synthetic-compare .synthetic-controls {
+    width: 100%;
+  }
+  .synthetic-slider-wrap {
+    flex-basis: 100%;
+    max-width: 100%;
+  }
+}
+
+/* ---- Showcase: per-row inline lighting probe overlay on the slider ---- */
+.showcase-scene .illum-picker {
+  justify-content: center;
+  margin-bottom: 0.6rem !important;
+}
+
+.showcase-scene .illum-picker .button.is-active {
+  background-color: hsl(204, 86%, 53%);
+  color: white;
+  border-color: hsl(204, 86%, 47%);
+}
+
+.showcase-probe {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  z-index: 3;
+  pointer-events: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 13%;
+  max-width: 48px;
+}
+
+.showcase-probe img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  border-radius: 50%;
+  background: #000;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.35);
+}
+
+.showcase-probe .showcase-probe-name {
+  display: none;
+}
+
+/* Keep the "PBR" label clear of the top-left lighting probe. */
+.showcase-scene .slider-cell .slider-label.left,
+.teaser-slider .slider-cell .slider-label.left {
+  top: auto;
+  bottom: 6px;
 }
 
 /* Sub-header chip used for "Synthetic Scenes" / "Real-world Scenes" groupings. */

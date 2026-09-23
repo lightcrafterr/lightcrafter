@@ -42,37 +42,6 @@
           <div class="is-size-5 publication-authors">
             <span class="author-block">Anonymous Submission</span>
           </div>
-
-          <!-- Paper / arXiv / Code / Data buttons hidden for anonymous submission.
-          <div class="column has-text-centered">
-            <div class="publication-links">
-              <span class="link-block">
-                <a href="#" class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon"><i class="fas fa-file-pdf"></i></span>
-                  <span>Paper</span>
-                </a>
-              </span>
-              <span class="link-block">
-                <a href="#" class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon"><i class="ai ai-arxiv"></i></span>
-                  <span>arXiv</span>
-                </a>
-              </span>
-              <span class="link-block">
-                <a href="#" class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon"><i class="fab fa-github"></i></span>
-                  <span>Code</span>
-                </a>
-              </span>
-              <span class="link-block">
-                <a href="#" class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon"><i class="far fa-images"></i></span>
-                  <span>Data</span>
-                </a>
-              </span>
-            </div>
-          </div>
-          -->
         </div>
       </div>
     </div>
@@ -81,11 +50,151 @@
 
 
 <section class="hero teaser">
-  <div class="container is-max-desktop">
+  <div class="container teaser-video-wrap">
     <div class="hero-body">
-      <figure class="image teaser-image">
-        <img src="./static/images/teaser.png" alt="Teaser figure of our method.">
-      </figure>
+      <div class="teaser-grid" data-ir-mode="appearance">
+        <div class="teaser-headrow">
+          <div class="teaser-head">Input</div>
+          <div class="teaser-head ir-head">
+            <span>Inverse Rendering (Reconstruction)</span>
+            <div class="buttons has-addons ir-toggle">
+              <button class="button is-small is-rounded is-active" data-ir="appearance">Appearance</button>
+              <button class="button is-small is-rounded" data-ir="geometry">Geometry</button>
+            </div>
+          </div>
+          <div class="teaser-head">Relighting via Physically Based Rendering (PBR) &rarr; Diffusion Refinement</div>
+        </div>
+
+        <!-- Row 1: Dancing -->
+        <div class="teaser-row">
+          <div class="teaser-cell">
+            <video autoplay muted loop playsinline class="teaser-video">
+              <source src="./static/videos/gallery/lalaland/input.mp4?v=7" type="video/mp4">
+            </video>
+          </div>
+          <div class="teaser-ir">
+            <div class="showcase-probe teaser-recon-probe">
+              <img src="./static/images/recon_envmaps/lalaland.png?v=1" alt="Reconstructed environment map (chrome ball).">
+            </div>
+            <div class="teaser-quad ir-appearance" style="--shift: 0%;">
+              <video autoplay muted loop playsinline class="teaser-video"><source src="./static/videos/gallery/lalaland/normal.mp4?v=1" type="video/mp4"></video>
+              <video autoplay muted loop playsinline class="teaser-video"><source src="./static/videos/gallery/lalaland/basecolor.mp4?v=1" type="video/mp4"></video>
+              <video autoplay muted loop playsinline class="teaser-video"><source src="./static/videos/gallery/lalaland/roughness.mp4?v=1" type="video/mp4"></video>
+              <video autoplay muted loop playsinline class="teaser-video"><source src="./static/videos/gallery/lalaland/metallic.mp4?v=1" type="video/mp4"></video>
+              <i class="qdiv qdiv1"></i><i class="qdiv qdiv2"></i><i class="qdiv qdiv3"></i>
+              <div class="qknob"></div>
+            </div>
+            <div class="ir-geometry">
+              <video autoplay muted loop playsinline><source src="./static/videos/gallery/lalaland/geometry.mp4?v=3" type="video/mp4"></video>
+            </div>
+          </div>
+          <div class="teaser-slider">
+            <div class="slider-cell teaser-slider-cell" style="--pos: 50%;">
+              <video autoplay muted loop playsinline class="teaser-video slider-before">
+                <source src="./static/videos/gallery/lalaland/pbr.mp4?v=14" type="video/mp4">
+              </video>
+              <video autoplay muted loop playsinline class="teaser-video slider-after">
+                <source src="./static/videos/gallery/lalaland/relit.mp4?v=7" type="video/mp4">
+              </video>
+              <span class="slider-label left">PBR</span>
+              <span class="slider-label right">Refined</span>
+              <div class="slider-handle"></div>
+              <div class="slider-knob"></div>
+              <div class="showcase-probe">
+                <img src="./static/images/envmaps/kiara_5_noon_2k_ball.png?v=2" alt="Target lighting probe (chrome ball).">
+                <span class="showcase-probe-name"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 2: Car -->
+        <div class="teaser-row">
+          <div class="teaser-cell">
+            <video autoplay muted loop playsinline class="teaser-video">
+              <source src="./static/videos/gallery/car-light-insertion/input.mp4?v=9" type="video/mp4">
+            </video>
+          </div>
+          <div class="teaser-ir">
+            <div class="showcase-probe teaser-recon-probe">
+              <img src="./static/images/recon_envmaps/car-light-insertion.png?v=1" alt="Reconstructed environment map (chrome ball).">
+            </div>
+            <div class="teaser-quad ir-appearance" style="--shift: 0%;">
+              <video autoplay muted loop playsinline class="teaser-video"><source src="./static/videos/gallery/car-light-insertion/normal.mp4?v=1" type="video/mp4"></video>
+              <video autoplay muted loop playsinline class="teaser-video"><source src="./static/videos/gallery/car-light-insertion/basecolor.mp4?v=1" type="video/mp4"></video>
+              <video autoplay muted loop playsinline class="teaser-video"><source src="./static/videos/gallery/car-light-insertion/roughness.mp4?v=1" type="video/mp4"></video>
+              <video autoplay muted loop playsinline class="teaser-video"><source src="./static/videos/gallery/car-light-insertion/metallic.mp4?v=1" type="video/mp4"></video>
+              <i class="qdiv qdiv1"></i><i class="qdiv qdiv2"></i><i class="qdiv qdiv3"></i>
+              <div class="qknob"></div>
+            </div>
+            <div class="ir-geometry">
+              <video autoplay muted loop playsinline><source src="./static/videos/gallery/car-light-insertion/geometry.mp4?v=2" type="video/mp4"></video>
+            </div>
+          </div>
+          <div class="teaser-slider">
+            <div class="slider-cell teaser-slider-cell" style="--pos: 50%;">
+              <video autoplay muted loop playsinline class="teaser-video slider-before">
+                <source src="./static/videos/gallery/car-light-insertion/pbr.mp4?v=9" type="video/mp4">
+              </video>
+              <video autoplay muted loop playsinline class="teaser-video slider-after">
+                <source src="./static/videos/gallery/car-light-insertion/relit.mp4?v=9" type="video/mp4">
+              </video>
+              <span class="slider-label left">PBR</span>
+              <span class="slider-label right">Refined</span>
+              <div class="slider-handle"></div>
+              <div class="slider-knob"></div>
+              <div class="showcase-probe">
+                <img src="./static/images/envmaps/satara_night_no_lamps_2k_ball.png?v=2" alt="Target lighting probe (chrome ball).">
+                <span class="showcase-probe-name"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Row 3: Human -->
+        <div class="teaser-row">
+          <div class="teaser-cell">
+            <video autoplay muted loop playsinline class="teaser-video">
+              <source src="./static/videos/gallery/human/input.mp4?v=20" type="video/mp4">
+            </video>
+          </div>
+          <div class="teaser-ir">
+            <div class="showcase-probe teaser-recon-probe">
+              <img src="./static/images/recon_envmaps/human.png?v=1" alt="Reconstructed environment map (chrome ball).">
+            </div>
+            <div class="teaser-quad ir-appearance" style="--shift: 0%;">
+              <video autoplay muted loop playsinline class="teaser-video"><source src="./static/videos/gallery/human/normal.mp4?v=2" type="video/mp4"></video>
+              <video autoplay muted loop playsinline class="teaser-video"><source src="./static/videos/gallery/human/basecolor.mp4?v=2" type="video/mp4"></video>
+              <video autoplay muted loop playsinline class="teaser-video"><source src="./static/videos/gallery/human/roughness.mp4?v=2" type="video/mp4"></video>
+              <video autoplay muted loop playsinline class="teaser-video"><source src="./static/videos/gallery/human/metallic.mp4?v=2" type="video/mp4"></video>
+              <i class="qdiv qdiv1"></i><i class="qdiv qdiv2"></i><i class="qdiv qdiv3"></i>
+              <div class="qknob"></div>
+            </div>
+            <div class="ir-geometry">
+              <video autoplay muted loop playsinline><source src="./static/videos/gallery/human/geometry.mp4?v=2" type="video/mp4"></video>
+            </div>
+          </div>
+          <div class="teaser-slider">
+            <div class="slider-cell teaser-slider-cell" style="--pos: 50%;">
+              <video autoplay muted loop playsinline class="teaser-video slider-before">
+                <source src="./static/videos/gallery/human/pbr.mp4?v=18" type="video/mp4">
+              </video>
+              <video autoplay muted loop playsinline class="teaser-video slider-after">
+                <source src="./static/videos/gallery/human/relit.mp4?v=19" type="video/mp4">
+              </video>
+              <span class="slider-label left">PBR</span>
+              <span class="slider-label right">Refined</span>
+              <div class="slider-handle"></div>
+              <div class="slider-knob"></div>
+              <div class="showcase-probe">
+                <img src="./static/images/envmaps/kiara_5_noon_2k_ball.png?v=2" alt="Target lighting probe (chrome ball).">
+                <span class="showcase-probe-name"></span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <h2 class="subtitle has-text-centered" style="margin-top: 1.5rem;">
         Given an input video, <strong>LightCrafter</strong> utilizes inverse-rendered
         photometric and geometric scene properties and refines a physically-based rendering
@@ -172,204 +281,8 @@
 </section>
 
 
-<!-- Comparison with Other Methods (interactive baseline picker) -->
-<section class="section" id="comparison">
-  <div class="container is-fluid comparison-container">
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-full-width">
-        <h2 class="title is-3">Comparison with Other Methods</h2>
-        <div class="content has-text-justified">
-          <p>
-            We compare against <strong>PCRP-Video</strong>, <strong>UniRelight</strong>,
-            <strong>LightX</strong>, and <strong>Diffusion-Renderer (DR)</strong> on long video
-            relighting tasks. The first row is a real-world scene where you can A/B our result
-            against any baseline; the rows below pin a single synthetic scene per baseline and
-            show source / target / ours / baseline side-by-side.
-          </p>
-          <p>
-            Baselines often produce plausible relighting but entangle illumination with
-            generation, causing baked-in source lighting, color-tone drift, or inconsistent
-            shadows; our explicit PBR proxy anchors the target-light interaction before
-            diffusion refinement, enabling more faithful and temporally consistent responses
-            to the target illumination.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Real-world interactive row: Source | PBR | Ours | <picked baseline> -->
-    <div class="has-text-centered" style="margin: 0.5rem 0 0.75rem;">
-      <span class="scene-group-label">Real-world Scene</span>
-    </div>
-    <div class="comparison-card comparison-header-card" id="realworld-row" style="--cols: 4;">
-      <div class="header-card-bar">
-        <div class="buttons has-addons is-centered baseline-picker">
-          <button class="button is-small is-rounded is-active" data-baseline="lightx">LightX</button>
-          <button class="button is-small is-rounded" data-baseline="dr">DR</button>
-          <button class="button is-small is-rounded" data-baseline="unirelight">UniRelight</button>
-          <button class="button is-small is-rounded" data-baseline="pcrp">PCRP-Video</button>
-        </div>
-      </div>
-      <div class="columns is-multiline is-centered is-mobile">
-        <div class="column has-text-centered">
-          <h5 class="title is-6">Source</h5>
-          <video autoplay muted loop playsinline class="comparison-video" data-method="input">
-            <source src="./static/videos/comparison/realworld-row/input.mp4?v=5" type="video/mp4">
-          </video>
-        </div>
-        <div class="column has-text-centered">
-          <h5 class="title is-6">PBR</h5>
-          <video autoplay muted loop playsinline class="comparison-video" data-method="pbr">
-            <source src="./static/videos/comparison/realworld-row/pbr.mp4?v=5" type="video/mp4">
-          </video>
-        </div>
-        <div class="column has-text-centered">
-          <h5 class="title is-6"><strong>Ours</strong></h5>
-          <video autoplay muted loop playsinline class="comparison-video" data-method="ours">
-            <source src="./static/videos/comparison/realworld-row/ours.mp4?v=5" type="video/mp4">
-          </video>
-        </div>
-        <div class="column has-text-centered">
-          <h5 class="title is-6 baseline-cell-label">vs LightX</h5>
-          <video autoplay muted loop playsinline class="comparison-video" data-method="baseline-pick" data-current="lightx">
-            <source src="./static/videos/comparison/realworld-row/lightx.mp4?v=5" type="video/mp4">
-          </video>
-        </div>
-      </div>
-    </div>
-
-    <!-- Synthetic scenes label -->
-    <div class="has-text-centered" style="margin: 1.5rem 0 0.75rem;">
-      <span class="scene-group-label">Synthetic Scenes</span>
-    </div>
-
-    <!-- Per-baseline rows (4-col: Source | Target | Ours | Baseline). The last row (PCRP-Video) has no source clip, so it shows Target | PBR | Ours | PCRP-Video instead. -->
-    <div class="comparison-card baseline-row" data-method="dr" style="--cols: 4;">
-      <h4 class="title is-5 row-method-title">vs Diffusion-Renderer (DR)</h4>
-      <div class="columns is-multiline is-centered is-mobile">
-        <div class="column has-text-centered">
-          <h5 class="title is-6">Source</h5>
-          <video autoplay muted loop playsinline class="comparison-video">
-            <source src="./static/videos/comparison/dr-row/src.mp4?v=4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column has-text-centered">
-          <h5 class="title is-6">Target</h5>
-          <video autoplay muted loop playsinline class="comparison-video">
-            <source src="./static/videos/comparison/dr-row/target.mp4?v=4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column has-text-centered">
-          <h5 class="title is-6"><strong>Ours</strong></h5>
-          <video autoplay muted loop playsinline class="comparison-video">
-            <source src="./static/videos/comparison/dr-row/ours.mp4?v=4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column has-text-centered">
-          <h5 class="title is-6">DR</h5>
-          <video autoplay muted loop playsinline class="comparison-video">
-            <source src="./static/videos/comparison/dr-row/baseline.mp4?v=4" type="video/mp4">
-          </video>
-        </div>
-      </div>
-    </div>
-
-    <div class="comparison-card baseline-row" data-method="unirelight" style="--cols: 4;">
-      <h4 class="title is-5 row-method-title">vs UniRelight</h4>
-      <div class="columns is-multiline is-centered is-mobile">
-        <div class="column has-text-centered">
-          <h5 class="title is-6">Source</h5>
-          <video autoplay muted loop playsinline class="comparison-video">
-            <source src="./static/videos/comparison/unirelight-row/src.mp4?v=4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column has-text-centered">
-          <h5 class="title is-6">Target</h5>
-          <video autoplay muted loop playsinline class="comparison-video">
-            <source src="./static/videos/comparison/unirelight-row/target.mp4?v=4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column has-text-centered">
-          <h5 class="title is-6"><strong>Ours</strong></h5>
-          <video autoplay muted loop playsinline class="comparison-video">
-            <source src="./static/videos/comparison/unirelight-row/ours.mp4?v=4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column has-text-centered">
-          <h5 class="title is-6">UniRelight</h5>
-          <video autoplay muted loop playsinline class="comparison-video">
-            <source src="./static/videos/comparison/unirelight-row/baseline.mp4?v=4" type="video/mp4">
-          </video>
-        </div>
-      </div>
-    </div>
-
-    <div class="comparison-card baseline-row" data-method="lightx" style="--cols: 4;">
-      <h4 class="title is-5 row-method-title">vs LightX</h4>
-      <div class="columns is-multiline is-centered is-mobile">
-        <div class="column has-text-centered">
-          <h5 class="title is-6">Source</h5>
-          <video autoplay muted loop playsinline class="comparison-video">
-            <source src="./static/videos/comparison/lightx-row/src.mp4?v=4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column has-text-centered">
-          <h5 class="title is-6">Target</h5>
-          <video autoplay muted loop playsinline class="comparison-video">
-            <source src="./static/videos/comparison/lightx-row/target.mp4?v=4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column has-text-centered">
-          <h5 class="title is-6"><strong>Ours</strong></h5>
-          <video autoplay muted loop playsinline class="comparison-video">
-            <source src="./static/videos/comparison/lightx-row/ours.mp4?v=4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column has-text-centered">
-          <h5 class="title is-6">LightX</h5>
-          <video autoplay muted loop playsinline class="comparison-video">
-            <source src="./static/videos/comparison/lightx-row/baseline.mp4?v=4" type="video/mp4">
-          </video>
-        </div>
-      </div>
-    </div>
-
-    <div class="comparison-card baseline-row" data-method="pcrp" style="--cols: 4;">
-      <h4 class="title is-5 row-method-title">vs PCRP-Video</h4>
-      <div class="columns is-multiline is-centered is-mobile">
-        <div class="column has-text-centered">
-          <h5 class="title is-6">Target</h5>
-          <video autoplay muted loop playsinline class="comparison-video">
-            <source src="./static/videos/comparison/pcrp-row/target.mp4?v=4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column has-text-centered">
-          <h5 class="title is-6">PBR</h5>
-          <video autoplay muted loop playsinline class="comparison-video">
-            <source src="./static/videos/comparison/pcrp-row/pbr.mp4?v=4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column has-text-centered">
-          <h5 class="title is-6"><strong>Ours</strong></h5>
-          <video autoplay muted loop playsinline class="comparison-video">
-            <source src="./static/videos/comparison/pcrp-row/ours.mp4?v=4" type="video/mp4">
-          </video>
-        </div>
-        <div class="column has-text-centered">
-          <h5 class="title is-6">PCRP-Video</h5>
-          <video autoplay muted loop playsinline class="comparison-video">
-            <source src="./static/videos/comparison/pcrp-row/baseline.mp4?v=4" type="video/mp4">
-          </video>
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
-
-
-<!-- Video Gallery (Our Results) -->
-<section class="section" id="gallery">
+<!-- Real-world Video Relighting Applications -->
+<section class="section" id="applications">
   <div class="container is-fluid gallery-container">
     <div class="columns is-centered has-text-centered">
       <div class="column is-full-width">
@@ -387,7 +300,6 @@
 
     <!-- 1. La La Land (3-col: input | pbr | relit) -->
     <div class="gallery-card is-grid" id="gallery-lalaland" style="--cols: 3;">
-      <h3 class="title is-4">Dynamic Scene: Dancing</h3>
       <div class="columns is-centered is-mobile">
         <div class="column has-text-centered">
           <h5 class="title is-6">Input</h5>
@@ -417,12 +329,11 @@
 
     <!-- 2. Human (3-col: input | pbr | relit) -->
     <div class="gallery-card is-grid" id="gallery-human" style="--cols: 3;">
-      <h3 class="title is-4">Dynamic Scene: Human Face</h3>
       <div class="columns is-centered is-mobile">
         <div class="column has-text-centered">
           <h5 class="title is-6">Input</h5>
           <video autoplay muted loop playsinline class="gallery-video">
-            <source src="./static/videos/gallery/human/input.mp4?v=18" type="video/mp4">
+            <source src="./static/videos/gallery/human/input.mp4?v=20" type="video/mp4">
           </video>
         </div>
         <div class="column has-text-centered">
@@ -439,7 +350,7 @@
         <div class="column has-text-centered">
           <h5 class="title is-6">Relit</h5>
           <video autoplay muted loop playsinline class="gallery-video">
-            <source src="./static/videos/gallery/human/relit.mp4?v=18" type="video/mp4">
+            <source src="./static/videos/gallery/human/relit.mp4?v=19" type="video/mp4">
           </video>
         </div>
       </div>
@@ -500,57 +411,188 @@
       </div>
     </div>
 
-    <hr class="section-divider">
+  </div>
+</section>
 
-    <!-- Showcase header -->
-    <div class="columns is-centered has-text-centered" style="margin-top: 1.5rem;">
+
+<!-- Long Video Relighting -->
+<section class="section" id="comparison">
+  <div class="container is-fluid comparison-container">
+    <div class="columns is-centered has-text-centered">
       <div class="column is-full-width">
-        <h2 class="title is-3">Showcase</h2>
+        <h2 class="title is-3">Long Video Relighting</h2>
         <div class="content has-text-justified">
           <p>
-            Multi-illumination relighting on a variety of scenes. Each row shows the
-            source video and three relit targets; drag the vertical handle on each panel
-            to compare <strong>PBR</strong> (left) vs <strong>Relit</strong> (right).
-            The PBR side uses the proxy rendered under that column&rsquo;s target
-            environment. Chrome-ball previews align with Illum 1&ndash;3 in the row below.
+            We compare against <strong>PCRP-Video</strong>, <strong>UniRelight</strong>,
+            <strong>LightX</strong>, and <strong>DiffusionRenderer</strong> on long video
+            relighting tasks. Choose which method appears on each side of the slider and
+            drag the handle to A/B the results &mdash; on a real-world scene below, and on
+            our synthetic benchmark (where a held-out Target is also available).
+          </p>
+          <p>
+            Baselines often produce plausible relighting but entangle illumination with
+            generation, causing baked-in source lighting, color-tone drift, or inconsistent
+            shadows; our explicit PBR proxy anchors the target-light interaction before
+            diffusion refinement, enabling more faithful and temporally consistent responses
+            to the target illumination.
           </p>
         </div>
       </div>
     </div>
 
-    <!-- Target environment maps (align with Illum 1&ndash;3 columns below) -->
-    <div class="gallery-card is-grid showcase-envmap-legend envmap-legend" style="--cols: 4;">
-      <div class="columns is-multiline is-centered is-mobile">
-        <div class="column has-text-centered showcase-envmap-legend-spacer">
-          <h5 class="title is-6">Input</h5>
+    <!-- Real-world scene label -->
+    <div class="has-text-centered" style="margin: 0.5rem 0 0.75rem;">
+      <span class="scene-group-label">Real-world Scene</span>
+    </div>
+
+    <!-- Interactive figure: choose the method on each side of the before/after slider. -->
+    <div class="comparison-card synthetic-compare" id="realworld-compare"
+         data-base="./static/videos/comparison/realworld-row" data-left="input" data-right="ours">
+      <div class="synthetic-controls">
+        <div class="control-group">
+          <span class="control-label">Left</span>
+          <div class="buttons has-addons is-centered method-picker rw-left-picker">
+            <button class="button is-small is-rounded is-active" data-method="input">Input</button>
+            <button class="button is-small is-rounded" data-method="pbr">PBR</button>
+            <button class="button is-small is-rounded" data-method="ours">Ours</button>
+            <button class="button is-small is-rounded" data-method="dr">DiffusionRenderer</button>
+            <button class="button is-small is-rounded" data-method="lightx">LightX</button>
+            <button class="button is-small is-rounded" data-method="unirelight">UniRelight</button>
+            <button class="button is-small is-rounded" data-method="pcrp">PCRP-Video</button>
+          </div>
         </div>
-        <div class="column has-text-centered">
-          <h5 class="title is-6">Illum 1</h5>
-          <img class="envmap-ball"
-               src="./static/images/envmaps/autumn_field_puresky_2k_ball.png?v=1"
-               alt="Chrome ball preview for autumn_field_puresky.">
-          <p class="is-size-7 has-text-grey">autumn_field_puresky</p>
+        <div class="control-group">
+          <span class="control-label">Right</span>
+          <div class="buttons has-addons is-centered method-picker rw-right-picker">
+            <button class="button is-small is-rounded" data-method="input">Input</button>
+            <button class="button is-small is-rounded" data-method="pbr">PBR</button>
+            <button class="button is-small is-rounded is-active" data-method="ours">Ours</button>
+            <button class="button is-small is-rounded" data-method="dr">DiffusionRenderer</button>
+            <button class="button is-small is-rounded" data-method="lightx">LightX</button>
+            <button class="button is-small is-rounded" data-method="unirelight">UniRelight</button>
+            <button class="button is-small is-rounded" data-method="pcrp">PCRP-Video</button>
+          </div>
         </div>
-        <div class="column has-text-centered">
-          <h5 class="title is-6">Illum 2</h5>
-          <img class="envmap-ball"
-               src="./static/images/envmaps/kiara_5_noon_2k_ball.png?v=1"
-               alt="Chrome ball preview for kiara_5_noon.">
-          <p class="is-size-7 has-text-grey">kiara_5_noon</p>
-        </div>
-        <div class="column has-text-centered">
-          <h5 class="title is-6">Illum 3</h5>
-          <img class="envmap-ball"
-               src="./static/images/envmaps/kloofendal_misty_morning_2k_ball.png?v=1"
-               alt="Chrome ball preview for kloofendal_misty_morning.">
-          <p class="is-size-7 has-text-grey">kloofendal_misty_morning</p>
+      </div>
+
+      <div class="synthetic-slider-wrap">
+        <div class="slider-cell synthetic-slider-cell" style="--pos: 50%;">
+          <video autoplay muted loop playsinline class="comparison-video slider-before">
+            <source src="./static/videos/comparison/realworld-row/input.mp4?v=5" type="video/mp4">
+          </video>
+          <video autoplay muted loop playsinline class="comparison-video slider-after">
+            <source src="./static/videos/comparison/realworld-row/ours.mp4?v=5" type="video/mp4">
+          </video>
+          <span class="slider-label left rw-left-label">Input</span>
+          <span class="slider-label right rw-right-label">Ours</span>
+          <div class="slider-handle"></div>
+          <div class="slider-knob"></div>
         </div>
       </div>
     </div>
 
-    <!-- Showcase row 1: Driving Scene 1 (4-col) -->
-    <div class="gallery-card is-grid" id="gallery-scene-1" style="--cols: 4;">
+    <!-- Synthetic scenes label -->
+    <div class="has-text-centered" style="margin: 1.5rem 0 0.75rem;">
+      <span class="scene-group-label">Synthetic Scenes</span>
+    </div>
+
+    <!-- Single interactive figure: pick a synthetic scene, then choose which
+         method appears on each side of the before/after slider. -->
+    <div class="comparison-card synthetic-compare" id="synthetic-compare"
+         data-scene="s1" data-left="ours" data-right="dr">
+      <div class="synthetic-controls">
+        <div class="control-group">
+          <span class="control-label">Scene</span>
+          <div class="buttons has-addons is-centered scene-picker syn-scene-picker">
+            <button class="button is-small is-rounded is-active" data-scene="s1">Scene 1</button>
+            <button class="button is-small is-rounded" data-scene="s2">Scene 2</button>
+            <button class="button is-small is-rounded" data-scene="s3">Scene 3</button>
+            <button class="button is-small is-rounded" data-scene="s4">Scene 4</button>
+          </div>
+        </div>
+        <div class="control-group">
+          <span class="control-label">Left</span>
+          <div class="buttons has-addons is-centered method-picker syn-left-picker">
+            <button class="button is-small is-rounded" data-method="input">Input</button>
+            <button class="button is-small is-rounded" data-method="target">Target</button>
+            <button class="button is-small is-rounded" data-method="pbr">PBR</button>
+            <button class="button is-small is-rounded is-active" data-method="ours">Ours</button>
+            <button class="button is-small is-rounded" data-method="dr">DiffusionRenderer</button>
+            <button class="button is-small is-rounded" data-method="lightx">LightX</button>
+          </div>
+        </div>
+        <div class="control-group">
+          <span class="control-label">Right</span>
+          <div class="buttons has-addons is-centered method-picker syn-right-picker">
+            <button class="button is-small is-rounded" data-method="input">Input</button>
+            <button class="button is-small is-rounded" data-method="target">Target</button>
+            <button class="button is-small is-rounded" data-method="pbr">PBR</button>
+            <button class="button is-small is-rounded" data-method="ours">Ours</button>
+            <button class="button is-small is-rounded is-active" data-method="dr">DiffusionRenderer</button>
+            <button class="button is-small is-rounded" data-method="lightx">LightX</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="synthetic-slider-wrap">
+        <div class="slider-cell synthetic-slider-cell" style="--pos: 50%;">
+          <video autoplay muted loop playsinline class="comparison-video slider-before">
+            <source src="./static/videos/comparison/s1/ours.mp4" type="video/mp4">
+          </video>
+          <video autoplay muted loop playsinline class="comparison-video slider-after">
+            <source src="./static/videos/comparison/s1/dr.mp4" type="video/mp4">
+          </video>
+          <span class="slider-label left syn-left-label">Ours</span>
+          <span class="slider-label right syn-right-label">DiffusionRenderer</span>
+          <div class="slider-handle"></div>
+          <div class="slider-knob"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- Additional Results -->
+<section class="section" id="gallery">
+  <div class="container is-fluid gallery-container">
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Additional Results</h2>
+        <div class="content has-text-justified">
+          <p>
+            Multi-illumination relighting on a variety of scenes. Each row shows the
+            input video alongside a single slider; drag the vertical handle to compare
+            <strong>PBR</strong> (left) vs <strong>Refined</strong> (right), and use the
+            <strong>Illum 1&ndash;3</strong> buttons to switch the target illumination.
+            The chrome-ball lighting probe in the corner previews the selected target
+            environment.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Showcase row 1: Driving Scene 1 (Input | PBR-vs-Relit slider, illum buttons) -->
+    <div class="gallery-card is-grid showcase-scene" id="gallery-scene-1" style="--cols: 2;">
       <h3 class="title is-4">Driving Scene 1</h3>
+      <div class="buttons has-addons is-centered illum-picker">
+        <button class="button is-small is-rounded is-active" data-illum="1"
+                data-pbr="./static/videos/gallery/in-the-wild-scene-paper/scene_1/illum1_pbr.mp4?v=11"
+                data-relit="./static/videos/gallery/in-the-wild-scene-paper/scene_1/illum1.mp4"
+                data-ball="./static/images/envmaps/autumn_field_puresky_2k_ball.png?v=1"
+                data-envname="autumn_field_puresky">Illum 1</button>
+        <button class="button is-small is-rounded" data-illum="2"
+                data-pbr="./static/videos/gallery/in-the-wild-scene-paper/scene_1/illum2_pbr.mp4?v=11"
+                data-relit="./static/videos/gallery/in-the-wild-scene-paper/scene_1/illum2.mp4"
+                data-ball="./static/images/envmaps/kiara_5_noon_2k_ball.png?v=1"
+                data-envname="kiara_5_noon">Illum 2</button>
+        <button class="button is-small is-rounded" data-illum="3"
+                data-pbr="./static/videos/gallery/in-the-wild-scene-paper/scene_1/illum3_pbr.mp4?v=11"
+                data-relit="./static/videos/gallery/in-the-wild-scene-paper/scene_1/illum3.mp4"
+                data-ball="./static/images/envmaps/kloofendal_misty_morning_2k_ball.png?v=1"
+                data-envname="kloofendal_misty_morning">Illum 3</button>
+      </div>
       <div class="columns is-multiline is-centered is-mobile">
         <div class="column has-text-centered">
           <h5 class="title is-6">Input</h5>
@@ -559,7 +601,7 @@
           </video>
         </div>
         <div class="column has-text-centered">
-          <h5 class="title is-6">Relit (Illum 1)</h5>
+          <h5 class="title is-6"><strong>PBR</strong> &harr; <strong>Refined</strong></h5>
           <div class="slider-cell" style="--pos: 50%;">
             <video autoplay muted loop playsinline class="gallery-video slider-before">
               <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_1/illum1_pbr.mp4?v=11" type="video/mp4">
@@ -568,49 +610,38 @@
               <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_1/illum1.mp4" type="video/mp4">
             </video>
             <span class="slider-label left">PBR</span>
-            <span class="slider-label right">Relit</span>
+            <span class="slider-label right">Refined</span>
             <div class="slider-handle"></div>
             <div class="slider-knob"></div>
+            <div class="showcase-probe">
+              <img src="./static/images/envmaps/autumn_field_puresky_2k_ball.png?v=1"
+                   alt="Target lighting probe (chrome ball).">
+              <span class="showcase-probe-name">autumn_field_puresky</span>
+            </div>
           </div>
-          <p class="is-size-7 has-text-grey">autumn_field_puresky</p>
-        </div>
-        <div class="column has-text-centered">
-          <h5 class="title is-6">Relit (Illum 2)</h5>
-          <div class="slider-cell" style="--pos: 50%;">
-            <video autoplay muted loop playsinline class="gallery-video slider-before">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_1/illum2_pbr.mp4?v=11" type="video/mp4">
-            </video>
-            <video autoplay muted loop playsinline class="gallery-video slider-after">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_1/illum2.mp4" type="video/mp4">
-            </video>
-            <span class="slider-label left">PBR</span>
-            <span class="slider-label right">Relit</span>
-            <div class="slider-handle"></div>
-            <div class="slider-knob"></div>
-          </div>
-          <p class="is-size-7 has-text-grey">kiara_5_noon</p>
-        </div>
-        <div class="column has-text-centered">
-          <h5 class="title is-6">Relit (Illum 3)</h5>
-          <div class="slider-cell" style="--pos: 50%;">
-            <video autoplay muted loop playsinline class="gallery-video slider-before">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_1/illum3_pbr.mp4?v=11" type="video/mp4">
-            </video>
-            <video autoplay muted loop playsinline class="gallery-video slider-after">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_1/illum3.mp4" type="video/mp4">
-            </video>
-            <span class="slider-label left">PBR</span>
-            <span class="slider-label right">Relit</span>
-            <div class="slider-handle"></div>
-            <div class="slider-knob"></div>
-          </div>
-          <p class="is-size-7 has-text-grey">kloofendal_misty_morning</p>
         </div>
       </div>
     </div>
 
-    <div class="gallery-card is-grid" id="gallery-scene-7" style="--cols: 4;">
+    <div class="gallery-card is-grid showcase-scene" id="gallery-scene-7" style="--cols: 2;">
       <h3 class="title is-4">Driving Scene 2</h3>
+      <div class="buttons has-addons is-centered illum-picker">
+        <button class="button is-small is-rounded is-active" data-illum="1"
+                data-pbr="./static/videos/gallery/in-the-wild-scene-paper/scene_7/illum1_pbr.mp4?v=11"
+                data-relit="./static/videos/gallery/in-the-wild-scene-paper/scene_7/illum1.mp4"
+                data-ball="./static/images/envmaps/autumn_field_puresky_2k_ball.png?v=1"
+                data-envname="autumn_field_puresky">Illum 1</button>
+        <button class="button is-small is-rounded" data-illum="2"
+                data-pbr="./static/videos/gallery/in-the-wild-scene-paper/scene_7/illum2_pbr.mp4?v=11"
+                data-relit="./static/videos/gallery/in-the-wild-scene-paper/scene_7/illum2.mp4"
+                data-ball="./static/images/envmaps/kiara_5_noon_2k_ball.png?v=1"
+                data-envname="kiara_5_noon">Illum 2</button>
+        <button class="button is-small is-rounded" data-illum="3"
+                data-pbr="./static/videos/gallery/in-the-wild-scene-paper/scene_7/illum3_pbr.mp4?v=11"
+                data-relit="./static/videos/gallery/in-the-wild-scene-paper/scene_7/illum3.mp4"
+                data-ball="./static/images/envmaps/kloofendal_misty_morning_2k_ball.png?v=1"
+                data-envname="kloofendal_misty_morning">Illum 3</button>
+      </div>
       <div class="columns is-multiline is-centered is-mobile">
         <div class="column has-text-centered">
           <h5 class="title is-6">Input</h5>
@@ -619,7 +650,7 @@
           </video>
         </div>
         <div class="column has-text-centered">
-          <h5 class="title is-6">Relit (Illum 1)</h5>
+          <h5 class="title is-6"><strong>PBR</strong> &harr; <strong>Refined</strong></h5>
           <div class="slider-cell" style="--pos: 50%;">
             <video autoplay muted loop playsinline class="gallery-video slider-before">
               <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_7/illum1_pbr.mp4?v=11" type="video/mp4">
@@ -628,49 +659,38 @@
               <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_7/illum1.mp4" type="video/mp4">
             </video>
             <span class="slider-label left">PBR</span>
-            <span class="slider-label right">Relit</span>
+            <span class="slider-label right">Refined</span>
             <div class="slider-handle"></div>
             <div class="slider-knob"></div>
+            <div class="showcase-probe">
+              <img src="./static/images/envmaps/autumn_field_puresky_2k_ball.png?v=1"
+                   alt="Target lighting probe (chrome ball).">
+              <span class="showcase-probe-name">autumn_field_puresky</span>
+            </div>
           </div>
-          <p class="is-size-7 has-text-grey">autumn_field_puresky</p>
-        </div>
-        <div class="column has-text-centered">
-          <h5 class="title is-6">Relit (Illum 2)</h5>
-          <div class="slider-cell" style="--pos: 50%;">
-            <video autoplay muted loop playsinline class="gallery-video slider-before">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_7/illum2_pbr.mp4?v=11" type="video/mp4">
-            </video>
-            <video autoplay muted loop playsinline class="gallery-video slider-after">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_7/illum2.mp4" type="video/mp4">
-            </video>
-            <span class="slider-label left">PBR</span>
-            <span class="slider-label right">Relit</span>
-            <div class="slider-handle"></div>
-            <div class="slider-knob"></div>
-          </div>
-          <p class="is-size-7 has-text-grey">kiara_5_noon</p>
-        </div>
-        <div class="column has-text-centered">
-          <h5 class="title is-6">Relit (Illum 3)</h5>
-          <div class="slider-cell" style="--pos: 50%;">
-            <video autoplay muted loop playsinline class="gallery-video slider-before">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_7/illum3_pbr.mp4?v=11" type="video/mp4">
-            </video>
-            <video autoplay muted loop playsinline class="gallery-video slider-after">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_7/illum3.mp4" type="video/mp4">
-            </video>
-            <span class="slider-label left">PBR</span>
-            <span class="slider-label right">Relit</span>
-            <div class="slider-handle"></div>
-            <div class="slider-knob"></div>
-          </div>
-          <p class="is-size-7 has-text-grey">kloofendal_misty_morning</p>
         </div>
       </div>
     </div>
 
-    <div class="gallery-card is-grid" id="gallery-scene-9" style="--cols: 4;">
+    <div class="gallery-card is-grid showcase-scene" id="gallery-scene-9" style="--cols: 2;">
       <h3 class="title is-4">Driving Scene 3</h3>
+      <div class="buttons has-addons is-centered illum-picker">
+        <button class="button is-small is-rounded is-active" data-illum="1"
+                data-pbr="./static/videos/gallery/in-the-wild-scene-paper/scene_9/illum1_pbr.mp4?v=11"
+                data-relit="./static/videos/gallery/in-the-wild-scene-paper/scene_9/illum1.mp4"
+                data-ball="./static/images/envmaps/autumn_field_puresky_2k_ball.png?v=1"
+                data-envname="autumn_field_puresky">Illum 1</button>
+        <button class="button is-small is-rounded" data-illum="2"
+                data-pbr="./static/videos/gallery/in-the-wild-scene-paper/scene_9/illum2_pbr.mp4?v=11"
+                data-relit="./static/videos/gallery/in-the-wild-scene-paper/scene_9/illum2.mp4"
+                data-ball="./static/images/envmaps/kiara_5_noon_2k_ball.png?v=1"
+                data-envname="kiara_5_noon">Illum 2</button>
+        <button class="button is-small is-rounded" data-illum="3"
+                data-pbr="./static/videos/gallery/in-the-wild-scene-paper/scene_9/illum3_pbr.mp4?v=11"
+                data-relit="./static/videos/gallery/in-the-wild-scene-paper/scene_9/illum3.mp4"
+                data-ball="./static/images/envmaps/kloofendal_misty_morning_2k_ball.png?v=1"
+                data-envname="kloofendal_misty_morning">Illum 3</button>
+      </div>
       <div class="columns is-multiline is-centered is-mobile">
         <div class="column has-text-centered">
           <h5 class="title is-6">Input</h5>
@@ -679,7 +699,7 @@
           </video>
         </div>
         <div class="column has-text-centered">
-          <h5 class="title is-6">Relit (Illum 1)</h5>
+          <h5 class="title is-6"><strong>PBR</strong> &harr; <strong>Refined</strong></h5>
           <div class="slider-cell" style="--pos: 50%;">
             <video autoplay muted loop playsinline class="gallery-video slider-before">
               <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_9/illum1_pbr.mp4?v=11" type="video/mp4">
@@ -688,49 +708,38 @@
               <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_9/illum1.mp4" type="video/mp4">
             </video>
             <span class="slider-label left">PBR</span>
-            <span class="slider-label right">Relit</span>
+            <span class="slider-label right">Refined</span>
             <div class="slider-handle"></div>
             <div class="slider-knob"></div>
+            <div class="showcase-probe">
+              <img src="./static/images/envmaps/autumn_field_puresky_2k_ball.png?v=1"
+                   alt="Target lighting probe (chrome ball).">
+              <span class="showcase-probe-name">autumn_field_puresky</span>
+            </div>
           </div>
-          <p class="is-size-7 has-text-grey">autumn_field_puresky</p>
-        </div>
-        <div class="column has-text-centered">
-          <h5 class="title is-6">Relit (Illum 2)</h5>
-          <div class="slider-cell" style="--pos: 50%;">
-            <video autoplay muted loop playsinline class="gallery-video slider-before">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_9/illum2_pbr.mp4?v=11" type="video/mp4">
-            </video>
-            <video autoplay muted loop playsinline class="gallery-video slider-after">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_9/illum2.mp4" type="video/mp4">
-            </video>
-            <span class="slider-label left">PBR</span>
-            <span class="slider-label right">Relit</span>
-            <div class="slider-handle"></div>
-            <div class="slider-knob"></div>
-          </div>
-          <p class="is-size-7 has-text-grey">kiara_5_noon</p>
-        </div>
-        <div class="column has-text-centered">
-          <h5 class="title is-6">Relit (Illum 3)</h5>
-          <div class="slider-cell" style="--pos: 50%;">
-            <video autoplay muted loop playsinline class="gallery-video slider-before">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_9/illum3_pbr.mp4?v=11" type="video/mp4">
-            </video>
-            <video autoplay muted loop playsinline class="gallery-video slider-after">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/scene_9/illum3.mp4" type="video/mp4">
-            </video>
-            <span class="slider-label left">PBR</span>
-            <span class="slider-label right">Relit</span>
-            <div class="slider-handle"></div>
-            <div class="slider-knob"></div>
-          </div>
-          <p class="is-size-7 has-text-grey">kloofendal_misty_morning</p>
         </div>
       </div>
     </div>
 
-    <div class="gallery-card is-grid" id="gallery-europe-building" style="--cols: 4;">
+    <div class="gallery-card is-grid showcase-scene" id="gallery-europe-building" style="--cols: 2;">
       <h3 class="title is-4">European Building</h3>
+      <div class="buttons has-addons is-centered illum-picker">
+        <button class="button is-small is-rounded is-active" data-illum="1"
+                data-pbr="./static/videos/gallery/in-the-wild-scene-paper/europe_building/illum1_pbr.mp4?v=11"
+                data-relit="./static/videos/gallery/in-the-wild-scene-paper/europe_building/illum1.mp4"
+                data-ball="./static/images/envmaps/autumn_field_puresky_2k_ball.png?v=1"
+                data-envname="autumn_field_puresky">Illum 1</button>
+        <button class="button is-small is-rounded" data-illum="2"
+                data-pbr="./static/videos/gallery/in-the-wild-scene-paper/europe_building/illum2_pbr.mp4?v=11"
+                data-relit="./static/videos/gallery/in-the-wild-scene-paper/europe_building/illum2.mp4"
+                data-ball="./static/images/envmaps/kiara_5_noon_2k_ball.png?v=1"
+                data-envname="kiara_5_noon">Illum 2</button>
+        <button class="button is-small is-rounded" data-illum="3"
+                data-pbr="./static/videos/gallery/in-the-wild-scene-paper/europe_building/illum3_pbr.mp4?v=11"
+                data-relit="./static/videos/gallery/in-the-wild-scene-paper/europe_building/illum3.mp4"
+                data-ball="./static/images/envmaps/kloofendal_misty_morning_2k_ball.png?v=1"
+                data-envname="kloofendal_misty_morning">Illum 3</button>
+      </div>
       <div class="columns is-multiline is-centered is-mobile">
         <div class="column has-text-centered">
           <h5 class="title is-6">Input</h5>
@@ -739,7 +748,7 @@
           </video>
         </div>
         <div class="column has-text-centered">
-          <h5 class="title is-6">Relit (Illum 1)</h5>
+          <h5 class="title is-6"><strong>PBR</strong> &harr; <strong>Refined</strong></h5>
           <div class="slider-cell" style="--pos: 50%;">
             <video autoplay muted loop playsinline class="gallery-video slider-before">
               <source src="./static/videos/gallery/in-the-wild-scene-paper/europe_building/illum1_pbr.mp4?v=11" type="video/mp4">
@@ -748,49 +757,38 @@
               <source src="./static/videos/gallery/in-the-wild-scene-paper/europe_building/illum1.mp4" type="video/mp4">
             </video>
             <span class="slider-label left">PBR</span>
-            <span class="slider-label right">Relit</span>
+            <span class="slider-label right">Refined</span>
             <div class="slider-handle"></div>
             <div class="slider-knob"></div>
+            <div class="showcase-probe">
+              <img src="./static/images/envmaps/autumn_field_puresky_2k_ball.png?v=1"
+                   alt="Target lighting probe (chrome ball).">
+              <span class="showcase-probe-name">autumn_field_puresky</span>
+            </div>
           </div>
-          <p class="is-size-7 has-text-grey">autumn_field_puresky</p>
-        </div>
-        <div class="column has-text-centered">
-          <h5 class="title is-6">Relit (Illum 2)</h5>
-          <div class="slider-cell" style="--pos: 50%;">
-            <video autoplay muted loop playsinline class="gallery-video slider-before">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/europe_building/illum2_pbr.mp4?v=11" type="video/mp4">
-            </video>
-            <video autoplay muted loop playsinline class="gallery-video slider-after">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/europe_building/illum2.mp4" type="video/mp4">
-            </video>
-            <span class="slider-label left">PBR</span>
-            <span class="slider-label right">Relit</span>
-            <div class="slider-handle"></div>
-            <div class="slider-knob"></div>
-          </div>
-          <p class="is-size-7 has-text-grey">kiara_5_noon</p>
-        </div>
-        <div class="column has-text-centered">
-          <h5 class="title is-6">Relit (Illum 3)</h5>
-          <div class="slider-cell" style="--pos: 50%;">
-            <video autoplay muted loop playsinline class="gallery-video slider-before">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/europe_building/illum3_pbr.mp4?v=11" type="video/mp4">
-            </video>
-            <video autoplay muted loop playsinline class="gallery-video slider-after">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/europe_building/illum3.mp4" type="video/mp4">
-            </video>
-            <span class="slider-label left">PBR</span>
-            <span class="slider-label right">Relit</span>
-            <div class="slider-handle"></div>
-            <div class="slider-knob"></div>
-          </div>
-          <p class="is-size-7 has-text-grey">kloofendal_misty_morning</p>
         </div>
       </div>
     </div>
 
-    <div class="gallery-card is-grid" id="gallery-temple" style="--cols: 4;">
+    <div class="gallery-card is-grid showcase-scene" id="gallery-temple" style="--cols: 2;">
       <h3 class="title is-4">Temple</h3>
+      <div class="buttons has-addons is-centered illum-picker">
+        <button class="button is-small is-rounded is-active" data-illum="1"
+                data-pbr="./static/videos/gallery/in-the-wild-scene-paper/temple/illum1_pbr.mp4?v=11"
+                data-relit="./static/videos/gallery/in-the-wild-scene-paper/temple/illum1.mp4"
+                data-ball="./static/images/envmaps/autumn_field_puresky_2k_ball.png?v=1"
+                data-envname="autumn_field_puresky">Illum 1</button>
+        <button class="button is-small is-rounded" data-illum="2"
+                data-pbr="./static/videos/gallery/in-the-wild-scene-paper/temple/illum2_pbr.mp4?v=11"
+                data-relit="./static/videos/gallery/in-the-wild-scene-paper/temple/illum2.mp4"
+                data-ball="./static/images/envmaps/kiara_5_noon_2k_ball.png?v=1"
+                data-envname="kiara_5_noon">Illum 2</button>
+        <button class="button is-small is-rounded" data-illum="3"
+                data-pbr="./static/videos/gallery/in-the-wild-scene-paper/temple/illum3_pbr.mp4?v=11"
+                data-relit="./static/videos/gallery/in-the-wild-scene-paper/temple/illum3.mp4"
+                data-ball="./static/images/envmaps/kloofendal_misty_morning_2k_ball.png?v=1"
+                data-envname="kloofendal_misty_morning">Illum 3</button>
+      </div>
       <div class="columns is-multiline is-centered is-mobile">
         <div class="column has-text-centered">
           <h5 class="title is-6">Input</h5>
@@ -799,7 +797,7 @@
           </video>
         </div>
         <div class="column has-text-centered">
-          <h5 class="title is-6">Relit (Illum 1)</h5>
+          <h5 class="title is-6"><strong>PBR</strong> &harr; <strong>Refined</strong></h5>
           <div class="slider-cell" style="--pos: 50%;">
             <video autoplay muted loop playsinline class="gallery-video slider-before">
               <source src="./static/videos/gallery/in-the-wild-scene-paper/temple/illum1_pbr.mp4?v=11" type="video/mp4">
@@ -808,49 +806,38 @@
               <source src="./static/videos/gallery/in-the-wild-scene-paper/temple/illum1.mp4" type="video/mp4">
             </video>
             <span class="slider-label left">PBR</span>
-            <span class="slider-label right">Relit</span>
+            <span class="slider-label right">Refined</span>
             <div class="slider-handle"></div>
             <div class="slider-knob"></div>
+            <div class="showcase-probe">
+              <img src="./static/images/envmaps/autumn_field_puresky_2k_ball.png?v=1"
+                   alt="Target lighting probe (chrome ball).">
+              <span class="showcase-probe-name">autumn_field_puresky</span>
+            </div>
           </div>
-          <p class="is-size-7 has-text-grey">autumn_field_puresky</p>
-        </div>
-        <div class="column has-text-centered">
-          <h5 class="title is-6">Relit (Illum 2)</h5>
-          <div class="slider-cell" style="--pos: 50%;">
-            <video autoplay muted loop playsinline class="gallery-video slider-before">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/temple/illum2_pbr.mp4?v=11" type="video/mp4">
-            </video>
-            <video autoplay muted loop playsinline class="gallery-video slider-after">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/temple/illum2.mp4" type="video/mp4">
-            </video>
-            <span class="slider-label left">PBR</span>
-            <span class="slider-label right">Relit</span>
-            <div class="slider-handle"></div>
-            <div class="slider-knob"></div>
-          </div>
-          <p class="is-size-7 has-text-grey">kiara_5_noon</p>
-        </div>
-        <div class="column has-text-centered">
-          <h5 class="title is-6">Relit (Illum 3)</h5>
-          <div class="slider-cell" style="--pos: 50%;">
-            <video autoplay muted loop playsinline class="gallery-video slider-before">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/temple/illum3_pbr.mp4?v=11" type="video/mp4">
-            </video>
-            <video autoplay muted loop playsinline class="gallery-video slider-after">
-              <source src="./static/videos/gallery/in-the-wild-scene-paper/temple/illum3.mp4" type="video/mp4">
-            </video>
-            <span class="slider-label left">PBR</span>
-            <span class="slider-label right">Relit</span>
-            <div class="slider-handle"></div>
-            <div class="slider-knob"></div>
-          </div>
-          <p class="is-size-7 has-text-grey">kloofendal_misty_morning</p>
         </div>
       </div>
     </div>
 
-    <div class="gallery-card is-grid" id="gallery-old-vintage-car" style="--cols: 4;">
+    <div class="gallery-card is-grid showcase-scene" id="gallery-old-vintage-car" style="--cols: 2;">
       <h3 class="title is-4">Old Vintage Car</h3>
+      <div class="buttons has-addons is-centered illum-picker">
+        <button class="button is-small is-rounded is-active" data-illum="1"
+                data-pbr="./static/videos/gallery/old-vintage-car/pbr_illum1.mp4?v=10"
+                data-relit="./static/videos/gallery/old-vintage-car/illum1.mp4?v=10"
+                data-ball="./static/images/envmaps/autumn_field_puresky_2k_ball.png?v=1"
+                data-envname="autumn_field_puresky">Illum 1</button>
+        <button class="button is-small is-rounded" data-illum="2"
+                data-pbr="./static/videos/gallery/old-vintage-car/pbr_illum2.mp4?v=10"
+                data-relit="./static/videos/gallery/old-vintage-car/illum2.mp4?v=10"
+                data-ball="./static/images/envmaps/kiara_5_noon_2k_ball.png?v=1"
+                data-envname="kiara_5_noon">Illum 2</button>
+        <button class="button is-small is-rounded" data-illum="3"
+                data-pbr="./static/videos/gallery/old-vintage-car/pbr_illum3.mp4?v=10"
+                data-relit="./static/videos/gallery/old-vintage-car/illum3.mp4?v=10"
+                data-ball="./static/images/envmaps/kloofendal_misty_morning_2k_ball.png?v=1"
+                data-envname="kloofendal_misty_morning">Illum 3</button>
+      </div>
       <div class="columns is-multiline is-centered is-mobile">
         <div class="column has-text-centered">
           <h5 class="title is-6">Input</h5>
@@ -859,7 +846,7 @@
           </video>
         </div>
         <div class="column has-text-centered">
-          <h5 class="title is-6">Relit (Illum 1)</h5>
+          <h5 class="title is-6"><strong>PBR</strong> &harr; <strong>Refined</strong></h5>
           <div class="slider-cell" style="--pos: 50%;">
             <video autoplay muted loop playsinline class="gallery-video slider-before">
               <source src="./static/videos/gallery/old-vintage-car/pbr_illum1.mp4?v=10" type="video/mp4">
@@ -868,49 +855,22 @@
               <source src="./static/videos/gallery/old-vintage-car/illum1.mp4?v=10" type="video/mp4">
             </video>
             <span class="slider-label left">PBR</span>
-            <span class="slider-label right">Relit</span>
+            <span class="slider-label right">Refined</span>
             <div class="slider-handle"></div>
             <div class="slider-knob"></div>
+            <div class="showcase-probe">
+              <img src="./static/images/envmaps/autumn_field_puresky_2k_ball.png?v=1"
+                   alt="Target lighting probe (chrome ball).">
+              <span class="showcase-probe-name">autumn_field_puresky</span>
+            </div>
           </div>
-          <p class="is-size-7 has-text-grey">autumn_field_puresky</p>
-        </div>
-        <div class="column has-text-centered">
-          <h5 class="title is-6">Relit (Illum 2)</h5>
-          <div class="slider-cell" style="--pos: 50%;">
-            <video autoplay muted loop playsinline class="gallery-video slider-before">
-              <source src="./static/videos/gallery/old-vintage-car/pbr_illum2.mp4?v=10" type="video/mp4">
-            </video>
-            <video autoplay muted loop playsinline class="gallery-video slider-after">
-              <source src="./static/videos/gallery/old-vintage-car/illum2.mp4?v=10" type="video/mp4">
-            </video>
-            <span class="slider-label left">PBR</span>
-            <span class="slider-label right">Relit</span>
-            <div class="slider-handle"></div>
-            <div class="slider-knob"></div>
-          </div>
-          <p class="is-size-7 has-text-grey">kiara_5_noon</p>
-        </div>
-        <div class="column has-text-centered">
-          <h5 class="title is-6">Relit (Illum 3)</h5>
-          <div class="slider-cell" style="--pos: 50%;">
-            <video autoplay muted loop playsinline class="gallery-video slider-before">
-              <source src="./static/videos/gallery/old-vintage-car/pbr_illum3.mp4?v=10" type="video/mp4">
-            </video>
-            <video autoplay muted loop playsinline class="gallery-video slider-after">
-              <source src="./static/videos/gallery/old-vintage-car/illum3.mp4?v=10" type="video/mp4">
-            </video>
-            <span class="slider-label left">PBR</span>
-            <span class="slider-label right">Relit</span>
-            <div class="slider-handle"></div>
-            <div class="slider-knob"></div>
-          </div>
-          <p class="is-size-7 has-text-grey">kloofendal_misty_morning</p>
         </div>
       </div>
     </div>
 
   </div>
 </section>
+
 
 <footer class="footer">
   <div class="container">

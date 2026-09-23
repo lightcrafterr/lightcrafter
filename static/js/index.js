@@ -83,7 +83,7 @@ $(document).ready(function() {
     // to the running playhead automatically.
     function videosIn(card) {
       return Array.prototype.slice.call(
-        card.querySelectorAll('video.comparison-video, video.gallery-video')
+        card.querySelectorAll('video.comparison-video, video.gallery-video, video.teaser-video')
       );
     }
 
@@ -136,7 +136,7 @@ $(document).ready(function() {
       });
     }
 
-    document.querySelectorAll('.comparison-card, .gallery-card').forEach(function (card) {
+    document.querySelectorAll('.comparison-card, .gallery-card, .teaser-row').forEach(function (card) {
       syncVideoGroup(card);
     });
 
@@ -247,4 +247,266 @@ $(document).ready(function() {
     }
 
     document.querySelectorAll('.slider-cell').forEach(wireSlider);
+
+    // ----- Teaser inverse-rendering quad: drag to shift the 4 diagonal bands -----
+    function wireQuadDrag(quad) {
+      var dragging = false;
+      function setShift(clientX) {
+        var rect = quad.getBoundingClientRect();
+        var pct = ((clientX - rect.left) / rect.width) * 100;
+        pct = Math.max(25, Math.min(75, pct));   // keep knob (middle divider) on-screen
+        quad.style.setProperty('--shift', (pct - 50) + '%');
+      }
+      quad.addEventListener('mousedown', function (e) { dragging = true; setShift(e.clientX); e.preventDefault(); });
+      window.addEventListener('mousemove', function (e) { if (dragging) setShift(e.clientX); });
+      window.addEventListener('mouseup', function () { dragging = false; });
+      quad.addEventListener('touchstart', function (e) { if (e.touches.length) { dragging = true; setShift(e.touches[0].clientX); } }, { passive: true });
+      quad.addEventListener('touchmove', function (e) { if (dragging && e.touches.length) setShift(e.touches[0].clientX); }, { passive: true });
+      quad.addEventListener('touchend', function () { dragging = false; });
+    }
+    document.querySelectorAll('.teaser-quad').forEach(wireQuadDrag);
+
+    // ----- Inverse-rendering Appearance / Reconstruction toggle (controls all rows) -----
+    (function () {
+      var grid = document.querySelector('.teaser-grid');
+      var toggle = document.querySelector('.ir-toggle');
+      if (!grid || !toggle) return;
+      var geoVids = Array.prototype.slice.call(grid.querySelectorAll('.ir-geometry video'));
+      geoVids.forEach(function (v) { v.muted = true; v.loop = true; v.playsInline = true; });
+      function playGeo() { geoVids.forEach(function (v) { v.play().catch(function () {}); }); }
+      toggle.addEventListener('click', function (e) {
+        var btn = e.target.closest('button[data-ir]');
+        if (!btn) return;
+        grid.setAttribute('data-ir-mode', btn.getAttribute('data-ir'));
+        Array.prototype.slice.call(toggle.querySelectorAll('button')).forEach(function (b) {
+          b.classList.toggle('is-active', b === btn);
+        });
+        if (btn.getAttribute('data-ir') === 'geometry') playGeo();
+      });
+      playGeo();
+    })();
+
+    // ----- Synthetic comparison: pick scene + left/right method for the slider -----
+    function wireSyntheticComparison() {
+      var root = document.getElementById('synthetic-compare');
+      if (!root) return;
+
+      var cell = root.querySelector('.synthetic-slider-cell');
+      var beforeVid = cell.querySelector('video.slider-before');
+      var afterVid = cell.querySelector('video.slider-after');
+      var leftLabel = root.querySelector('.syn-left-label');
+      var rightLabel = root.querySelector('.syn-right-label');
+      var scenePicker = root.querySelector('.syn-scene-picker');
+      var leftPicker = root.querySelector('.syn-left-picker');
+      var rightPicker = root.querySelector('.syn-right-picker');
+
+      var FILE = {
+        input: 'input', target: 'gt', pbr: 'pbr', ours: 'ours',
+        dr: 'dr', lightx: 'lightx'
+      };
+      var LABEL = {
+        input: 'Input', target: 'Target', pbr: 'PBR', ours: 'Ours',
+        dr: 'DiffusionRenderer', lightx: 'LightX'
+      };
+      // Methods available in every synthetic scene folder.
+      var AVAIL = {
+        s1: ['input', 'target', 'pbr', 'ours', 'dr', 'lightx'],
+        s2: ['input', 'target', 'pbr', 'ours', 'dr', 'lightx'],
+        s3: ['input', 'target', 'pbr', 'ours', 'dr', 'lightx'],
+        s4: ['input', 'target', 'pbr', 'ours', 'dr', 'lightx']
+      };
+
+      function srcFor(scene, method) {
+        return './static/videos/comparison/' + scene + '/' + FILE[method] + '.mp4';
+      }
+      function setVideo(video, url) {
+        var s = video.querySelector('source');
+        if (!s) return;
+        if (s.getAttribute('src') === url) return;
+        s.setAttribute('src', url);
+        video.load();
+        video.play().catch(function () { /* ignore */ });
+      }
+      function setActive(group, attr, value) {
+        Array.prototype.slice.call(group.querySelectorAll('button')).forEach(function (b) {
+          if (b.getAttribute(attr) === value) b.classList.add('is-active');
+          else b.classList.remove('is-active');
+        });
+      }
+      function applyAvailability(scene) {
+        var avail = AVAIL[scene] || [];
+        [leftPicker, rightPicker].forEach(function (group) {
+          Array.prototype.slice.call(group.querySelectorAll('button[data-method]'))
+            .forEach(function (b) {
+              var ok = avail.indexOf(b.getAttribute('data-method')) !== -1;
+              b.disabled = !ok;
+              b.classList.toggle('is-disabled', !ok);
+            });
+        });
+      }
+      function resolve(scene, method) {
+        var avail = AVAIL[scene] || [];
+        if (avail.indexOf(method) !== -1) return method;
+        return avail[0] || method;
+      }
+
+      function render() {
+        var scene = root.getAttribute('data-scene');
+        var left = resolve(scene, root.getAttribute('data-left'));
+        var right = resolve(scene, root.getAttribute('data-right'));
+        root.setAttribute('data-left', left);
+        root.setAttribute('data-right', right);
+
+        applyAvailability(scene);
+        setActive(scenePicker, 'data-scene', scene);
+        setActive(leftPicker, 'data-method', left);
+        setActive(rightPicker, 'data-method', right);
+
+        setVideo(beforeVid, srcFor(scene, left));
+        setVideo(afterVid, srcFor(scene, right));
+        if (leftLabel) leftLabel.textContent = LABEL[left];
+        if (rightLabel) rightLabel.textContent = LABEL[right];
+      }
+
+      scenePicker.addEventListener('click', function (e) {
+        var btn = e.target.closest('button[data-scene]');
+        if (!btn) return;
+        root.setAttribute('data-scene', btn.getAttribute('data-scene'));
+        render();
+      });
+      leftPicker.addEventListener('click', function (e) {
+        var btn = e.target.closest('button[data-method]');
+        if (!btn || btn.disabled) return;
+        root.setAttribute('data-left', btn.getAttribute('data-method'));
+        render();
+      });
+      rightPicker.addEventListener('click', function (e) {
+        var btn = e.target.closest('button[data-method]');
+        if (!btn || btn.disabled) return;
+        root.setAttribute('data-right', btn.getAttribute('data-method'));
+        render();
+      });
+
+      render();
+    }
+
+    wireSyntheticComparison();
+
+    // ----- Real-world comparison: single scene, choose method per slider side -----
+    function wireRealworldComparison() {
+      var root = document.getElementById('realworld-compare');
+      if (!root) return;
+      var base = root.getAttribute('data-base');
+      var cell = root.querySelector('.synthetic-slider-cell');
+      var beforeVid = cell.querySelector('video.slider-before');
+      var afterVid = cell.querySelector('video.slider-after');
+      var leftLabel = root.querySelector('.rw-left-label');
+      var rightLabel = root.querySelector('.rw-right-label');
+      var leftPicker = root.querySelector('.rw-left-picker');
+      var rightPicker = root.querySelector('.rw-right-picker');
+
+      var FILE = {
+        input: 'input', pbr: 'pbr', ours: 'ours', dr: 'dr',
+        lightx: 'lightx', unirelight: 'unirelight', pcrp: 'pcrp'
+      };
+      var LABEL = {
+        input: 'Input', pbr: 'PBR', ours: 'Ours', dr: 'DiffusionRenderer',
+        lightx: 'LightX', unirelight: 'UniRelight', pcrp: 'PCRP-Video'
+      };
+
+      function srcFor(method) { return base + '/' + FILE[method] + '.mp4?v=5'; }
+      function setVideo(video, url) {
+        var s = video.querySelector('source');
+        if (!s) return;
+        if (s.getAttribute('src') === url) return;
+        s.setAttribute('src', url);
+        video.load();
+        video.play().catch(function () { /* ignore */ });
+      }
+      function setActive(group, value) {
+        Array.prototype.slice.call(group.querySelectorAll('button')).forEach(function (b) {
+          if (b.getAttribute('data-method') === value) b.classList.add('is-active');
+          else b.classList.remove('is-active');
+        });
+      }
+      function render() {
+        var left = root.getAttribute('data-left');
+        var right = root.getAttribute('data-right');
+        setActive(leftPicker, left);
+        setActive(rightPicker, right);
+        setVideo(beforeVid, srcFor(left));
+        setVideo(afterVid, srcFor(right));
+        if (leftLabel) leftLabel.textContent = LABEL[left];
+        if (rightLabel) rightLabel.textContent = LABEL[right];
+      }
+      leftPicker.addEventListener('click', function (e) {
+        var btn = e.target.closest('button[data-method]');
+        if (!btn) return;
+        root.setAttribute('data-left', btn.getAttribute('data-method'));
+        render();
+      });
+      rightPicker.addEventListener('click', function (e) {
+        var btn = e.target.closest('button[data-method]');
+        if (!btn) return;
+        root.setAttribute('data-right', btn.getAttribute('data-method'));
+        render();
+      });
+      render();
+    }
+
+    wireRealworldComparison();
+
+    // ----- Showcase scenes: pick illum for the slider + inline lighting probe -----
+    function wireShowcaseScene(card) {
+      var cell = card.querySelector('.slider-cell');
+      if (!cell) return;
+      var beforeVid = cell.querySelector('video.slider-before');
+      var afterVid = cell.querySelector('video.slider-after');
+      var probe = card.querySelector('.showcase-probe');
+      var picker = card.querySelector('.illum-picker');
+      if (!picker || !beforeVid || !afterVid) return;
+
+      function setVideo(video, url) {
+        var s = video.querySelector('source');
+        if (!s || !url) return;
+        if (s.getAttribute('src') === url) return;
+        s.setAttribute('src', url);
+        video.load();
+        video.play().catch(function () { /* ignore */ });
+      }
+      function setActive(value) {
+        Array.prototype.slice.call(picker.querySelectorAll('button[data-illum]'))
+          .forEach(function (b) {
+            if (b.getAttribute('data-illum') === value) b.classList.add('is-active');
+            else b.classList.remove('is-active');
+          });
+      }
+
+      function selectIllum(illum) {
+        var btn = picker.querySelector('button[data-illum="' + illum + '"]');
+        if (!btn) return;
+        setActive(illum);
+        setVideo(beforeVid, btn.getAttribute('data-pbr'));
+        setVideo(afterVid, btn.getAttribute('data-relit'));
+        if (probe) {
+          var ball = btn.getAttribute('data-ball');
+          var name = btn.getAttribute('data-envname') || '';
+          if (ball) probe.querySelector('img').setAttribute('src', ball);
+          var cap = probe.querySelector('.showcase-probe-name');
+          if (cap) cap.textContent = name;
+        }
+      }
+
+      picker.addEventListener('click', function (e) {
+        var btn = e.target.closest('button[data-illum]');
+        if (!btn) return;
+        selectIllum(btn.getAttribute('data-illum'));
+      });
+
+      var active = picker.querySelector('button.is-active[data-illum]') ||
+                   picker.querySelector('button[data-illum]');
+      if (active) selectIllum(active.getAttribute('data-illum'));
+    }
+
+    document.querySelectorAll('.showcase-scene').forEach(wireShowcaseScene);
 })
