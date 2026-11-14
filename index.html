@@ -418,12 +418,12 @@
   <div class="carousel">
         <div class="carousel-track">
           <div class="item"><div class="item-inner">
-            <video autoplay muted loop playsinline><source data-src="./static/videos/grids/fusion/fusion-syn-nofusion.mp4" type="video/mp4"></video>
-            <p class="subtitle">Synthetic scene (static objects, rotating camera), no fusion. Window boundaries are at frames 48|49, 97|98 and 146|147 for Light-X and ours, and at 56|57, 113|114 and 170|171 for DiffusionRenderer and UniRelight (the video plays at 10 frames per second). Ours stays consistent across its window boundaries even without fusion, because every window is conditioned on the same PBR proxy, which grounds the video refinement. The baselines change at each boundary: UniRelight's cast shadows switch sides, Light-X's cubes change color, and DiffusionRenderer's exposure steps.</p>
+            <video autoplay muted loop playsinline><source data-src="./static/videos/grids/fusion/fusion-syn-nofusion.mp4?v=2" type="video/mp4"></video>
+            <p class="subtitle">Synthetic scene (static objects, rotating camera), no fusion. Window boundaries are at frames 48|49, 97|98 and 146|147 for Light-X and ours, and at 56|57, 113|114 and 170|171 for DiffusionRenderer and UniRelight (the video plays at 10 frames per second). Ours stays consistent across its window boundaries even without fusion, because every window is conditioned on the same PBR proxy, which grounds the video refinement. The baselines change at each boundary: UniRelight's cubes and cylinder switch between lit and shadowed, Light-X's cubes change color, and DiffusionRenderer's exposure steps.</p>
           </div></div>
           <div class="item"><div class="item-inner">
-            <video autoplay muted loop playsinline><source data-src="./static/videos/grids/fusion/fusion-lighthouse-nofusion.mp4" type="video/mp4"></video>
-            <p class="subtitle">Coastal lighthouse (first 97 frames), no fusion. There is one boundary per method: 48|49 for Light-X and ours, 56|57 for DiffusionRenderer and UniRelight. All four diffusion-based methods jump there, including ours, whose second window renders the rocks and sea in a different tone; the PBR proxy does not.</p>
+            <video autoplay muted loop playsinline><source data-src="./static/videos/grids/fusion/fusion-lighthouse-nofusion.mp4?v=2" type="video/mp4"></video>
+            <p class="subtitle">Coastal lighthouse (first 97 frames), no fusion. There is one boundary per method: 48|49 for Light-X and ours, 56|57 for DiffusionRenderer and UniRelight. All four diffusion-based methods change there, including ours, whose second window renders the rocks and sea in a different tone; the change is smallest for UniRelight, whose blue-gray cast turns neutral. The PBR proxy does not change.</p>
           </div></div>
         </div>
         <button class="carousel-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
@@ -434,12 +434,12 @@
   <div class="carousel">
         <div class="carousel-track">
           <div class="item"><div class="item-inner">
-            <video autoplay muted loop playsinline><source data-src="./static/videos/grids/fusion/fusion-syn-fusion.mp4" type="video/mp4"></video>
+            <video autoplay muted loop playsinline><source data-src="./static/videos/grids/fusion/fusion-syn-fusion.mp4?v=2" type="video/mp4"></video>
             <p class="subtitle">Same synthetic scene, with fusion. The jumps at the window boundaries are gone for every method. In the overlap frames (37&ndash;48, 77&ndash;88, 117&ndash;128 for 49-frame windows; 41&ndash;56, 89&ndash;104, 137&ndash;152 for 57-frame windows) the baselines average two windows that disagree: objects blur or double in DiffusionRenderer and UniRelight, and colors and shadows morph gradually in Light-X. Our windows are conditioned on the same proxy and agree, so the overlap frames show no ghosting.</p>
           </div></div>
           <div class="item"><div class="item-inner">
-            <video autoplay muted loop playsinline><source data-src="./static/videos/grids/fusion/fusion-lighthouse-fusion.mp4" type="video/mp4"></video>
-            <p class="subtitle">Coastal lighthouse, with fusion. Our jump at 48|49 disappears. Light-X's jump is replaced by a slow change of the rock color over the clip, UniRelight brightens from dusk to daylight toward the end, and DiffusionRenderer keeps a step at 56|57.</p>
+            <video autoplay muted loop playsinline><source data-src="./static/videos/grids/fusion/fusion-lighthouse-fusion.mp4?v=2" type="video/mp4"></video>
+            <p class="subtitle">Coastal lighthouse, with fusion. Our jump at 48|49 disappears. Light-X's jump is replaced by a slow change of the rock color over the clip, UniRelight's blue-gray cast fades slowly over the clip, and DiffusionRenderer keeps a step at 56|57.</p>
           </div></div>
         </div>
         <button class="carousel-prev" aria-label="Previous"><i class="fas fa-chevron-left"></i></button>
